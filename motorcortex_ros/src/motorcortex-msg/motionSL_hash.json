@@ -1,0 +1,118 @@
+[
+    {
+        "type": "motion_spec.ToolTipOffset",
+        "hash": "0xc7449ab"
+    },
+    {
+        "type": "motion_spec.MotionConstraint",
+        "hash": "0xdcb56232"
+    },
+    {
+        "type": "motion_spec.USERFRAMETYPE",
+        "hash": "0xb0b2254c"
+    },
+    {
+        "type": "motion_spec.WAYPOINTCONSTRAINTTYPE",
+        "hash": "0xf8681ef4"
+    },
+    {
+        "type": "motion_spec.MOTIONTYPE",
+        "hash": "0x2e1f4cec"
+    },
+    {
+        "type": "motion_spec.CartWaypoint",
+        "hash": "0xf3a0bec7"
+    },
+    {
+        "type": "motion_spec.MoveL",
+        "hash": "0xf51fd6c1"
+    },
+    {
+        "type": "motion_spec.TimeAndAccConstraintValues",
+        "hash": "0x4075b344"
+    },
+    {
+        "type": "motion_spec.CartToJointList",
+        "hash": "0x146a3750"
+    },
+    {
+        "type": "motion_spec.Wait",
+        "hash": "0xe6915ae9"
+    },
+    {
+        "type": "motion_spec.Get",
+        "hash": "0x2b7faf4b"
+    },
+    {
+        "type": "motion_spec.VelAndAccConstraintValues",
+        "hash": "0xbf637b63"
+    },
+    {
+        "type": "motion_spec.JointToCartList",
+        "hash": "0x2f122502"
+    },
+    {
+        "type": "motion_spec.FEATUREFRAMETYPE",
+        "hash": "0xe8bba8ba"
+    },
+    {
+        "type": "motion_spec.JointWaypoint",
+        "hash": "0x2da950c"
+    },
+    {
+        "type": "motion_spec.MoveC",
+        "hash": "0xc0be79e3"
+    },
+    {
+        "type": "motion_spec.Set",
+        "hash": "0xdb712696"
+    },
+    {
+        "type": "motion_spec.JointPositions",
+        "hash": "0x808c28d8"
+    },
+    {
+        "type": "motion_spec.JointToCart",
+        "hash": "0x7088e295"
+    },
+    {
+        "type": "motion_spec.Twist",
+        "hash": "0xd3c562e8"
+    },
+    {
+        "type": "motion_spec.CartPose6",
+        "hash": "0xc42bec47"
+    },
+    {
+        "type": "motion_spec.MoveJ",
+        "hash": "0xc06a3050"
+    },
+    {
+        "type": "motion_spec.CartToJoint",
+        "hash": "0x558e182c"
+    },
+    {
+        "type": "motion_spec.WayPointConstraint",
+        "hash": "0x175e101a"
+    },
+    {
+        "type": "motion_spec.MotionCommand",
+        "hash": "0x8790590b"
+    },
+    {
+        "type": "motion_spec.JointVelocities",
+        "hash": "0xbb081183"
+    },
+    {
+        "type": "motion_spec.TimeAndTimeAccConstraintValues",
+        "hash": "0xfa5da01b"
+    },
+    {
+        "type": "motion_spec.MotionProgram",
+        "hash": "0x5ba34516"
+    },
+    {
+        "type": "motion_spec.MOTIONCONSTRAINTTYPE",
+        "hash": "0x219071ca"
+    }
+]

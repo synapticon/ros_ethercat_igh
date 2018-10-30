@@ -1,0 +1,4 @@
+int32 statusword
+int32 position_value
+bool drive_enabled
+int32 drive_error_code

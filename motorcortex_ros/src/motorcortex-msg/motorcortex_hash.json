@@ -1,0 +1,166 @@
+[
+    {
+        "type": "motorcortex.Error",
+        "hash": "0xcb54b842"
+    },
+    {
+        "type": "motorcortex.ParameterTreeHashMsg",
+        "hash": "0xc8cef26b"
+    },
+    {
+        "type": "motorcortex.LoadMsg",
+        "hash": "0xf173d6cc"
+    },
+    {
+        "type": "motorcortex.Unit",
+        "hash": "0x1f444f39"
+    },
+    {
+        "type": "motorcortex.LogoutMsg",
+        "hash": "0xd796dcd5"
+    },
+    {
+        "type": "motorcortex.Permission",
+        "hash": "0xbfdf653b"
+    },
+    {
+        "type": "motorcortex.ParameterMsg",
+        "hash": "0x5815f142"
+    },
+    {
+        "type": "motorcortex.ErrorLevel",
+        "hash": "0x14838051"
+    },
+    {
+        "type": "motorcortex.Header",
+        "hash": "0x52e24278"
+    },
+    {
+        "type": "motorcortex.CreateGroupMsg",
+        "hash": "0x9eab1b83"
+    },
+    {
+        "type": "motorcortex.GetParameterTreeMsg",
+        "hash": "0x61d73753"
+    },
+    {
+        "type": "motorcortex.GetParameterTreeHashMsg",
+        "hash": "0x1711b24"
+    },
+    {
+        "type": "motorcortex.StatusMsg",
+        "hash": "0xb2b3b41b"
+    },
+    {
+        "type": "motorcortex.ConsoleCmdMsg",
+        "hash": "0x4efc6762"
+    },
+    {
+        "type": "motorcortex.GetParameterListMsg",
+        "hash": "0x520608a5"
+    },
+    {
+        "type": "motorcortex.ParameterType",
+        "hash": "0x9f573eea"
+    },
+    {
+        "type": "motorcortex.UserGroup",
+        "hash": "0x651cf623"
+    },
+    {
+        "type": "motorcortex.GroupMsg",
+        "hash": "0xfe8efea8"
+    },
+    {
+        "type": "motorcortex.LoginMsg",
+        "hash": "0x630d225"
+    },
+    {
+        "type": "motorcortex.OverwriteParameterMsg",
+        "hash": "0x98505467"
+    },
+    {
+        "type": "motorcortex.RemoveGroupMsg",
+        "hash": "0x7614c1ac"
+    },
+    {
+        "type": "motorcortex.ErrorList",
+        "hash": "0xa63be891"
+    },
+    {
+        "type": "motorcortex.GroupStatusMsg",
+        "hash": "0x67aafaff"
+    },
+    {
+        "type": "motorcortex.ConsoleCmdListMsg",
+        "hash": "0x96e4c2b0"
+    },
+    {
+        "type": "motorcortex.ReleaseParameterMsg",
+        "hash": "0xbb43acc2"
+    },
+    {
+        "type": "motorcortex.ParameterTreeMsg",
+        "hash": "0xd31979bf"
+    },
+    {
+        "type": "motorcortex.GetSessionTokenMsg",
+        "hash": "0x4ff6b6f7"
+    },
+    {
+        "type": "motorcortex.SetParameterListMsg",
+        "hash": "0xe1bd5231"
+    },
+    {
+        "type": "motorcortex.GetParameterMsg",
+        "hash": "0x985f2c2f"
+    },
+    {
+        "type": "motorcortex.ParameterListMsg",
+        "hash": "0xadd954d9"
+    },
+    {
+        "type": "motorcortex.OffsetType",
+        "hash": "0x74cbd84c"
+    },
+    {
+        "type": "motorcortex.ParameterOffset",
+        "hash": "0x37d97249"
+    },
+    {
+        "type": "motorcortex.SaveMsg",
+        "hash": "0xc965b56a"
+    },
+    {
+        "type": "motorcortex.SessionTokenMsg",
+        "hash": "0x7c3e91ab"
+    },
+    {
+        "type": "motorcortex.GroupParameterInfo",
+        "hash": "0x1d5d6a0a"
+    },
+    {
+        "type": "motorcortex.ParameterFlag",
+        "hash": "0xbcb0202c"
+    },
+    {
+        "type": "motorcortex.ParameterInfo",
+        "hash": "0x52f7c2b8"
+    },
+    {
+        "type": "motorcortex.RestoreSessionMsg",
+        "hash": "0x8aef888a"
+    },
+    {
+        "type": "motorcortex.StatusCode",
+        "hash": "0xd1a8ebbf"
+    },
+    {
+        "type": "motorcortex.SetParameterMsg",
+        "hash": "0xa78d07b6"
+    },
+    {
+        "type": "motorcortex.DataType",
+        "hash": "0x62923b3a"
+    }
+]
