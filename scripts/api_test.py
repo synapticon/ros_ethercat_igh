@@ -9,7 +9,9 @@ import unittest
 import motorcortex
 import time
 
-SERVER = '192.168.179.45'
+SERVER = 'localhost'
+
+api_path = '../src/motorcortex_api/motorcortex-msg'
 
 
 class MessageTypesTest(unittest.TestCase):
@@ -17,8 +19,8 @@ class MessageTypesTest(unittest.TestCase):
     def test(self):
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         # check if namespaces exist
         self.assertTrue(motorcortex_types.getNamespace("motorcortex"))
@@ -71,8 +73,8 @@ class Login(unittest.TestCase):
         # Open request connection
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         parameter_tree = motorcortex.ParameterTree()
         req = motorcortex.Request(motorcortex_types, parameter_tree)
@@ -98,8 +100,8 @@ class DecodeEncode(unittest.TestCase):
     def test(self):
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         # check if namespaces exist
         self.assertTrue(motorcortex_types.getNamespace("motorcortex"))
@@ -139,8 +141,8 @@ class ParameterTree(unittest.TestCase):
         # Open request connection
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         parameter_tree = motorcortex.ParameterTree()
         req = motorcortex.Request(motorcortex_types, parameter_tree)
@@ -177,8 +179,8 @@ class SetGetParameter(unittest.TestCase):
         # Open request connection
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         parameter_tree = motorcortex.ParameterTree()
         req = motorcortex.Request(motorcortex_types, parameter_tree)
@@ -233,8 +235,8 @@ class SubParameter(unittest.TestCase):
         # Open request connection
         motorcortex_types = motorcortex.MessageTypes()
         motorcortex_msg, motionsl_msg = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'},
-             {'proto': './motorcortex-msg/motionSL_pb2.py', 'hash': './motorcortex-msg/motionSL_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'},
+             {'proto': api_path + '/motionSL_pb2.py', 'hash': api_path + '/motionSL_hash.json'}])
 
         parameter_tree = motorcortex.ParameterTree()
         req = motorcortex.Request(motorcortex_types, parameter_tree)
