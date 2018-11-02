@@ -37,7 +37,7 @@ class Control(object):
         # Loading protobuf types and hashes
         motorcortex_types = motorcortex.MessageTypes()
         self.motorcortex_msg, = motorcortex_types.load(
-            [{'proto': './motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex-msg/motorcortex_hash.json'}])
+            [{'proto': './motorcortex_api/motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex_api/motorcortex-msg/motorcortex_hash.json'}])
         motorcortex_msg = self.motorcortex_msg
 
         # Open request connection
