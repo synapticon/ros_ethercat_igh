@@ -7,6 +7,14 @@ import rospy
 from motorcortex_ros.msg import MotorcortexIn, MotorcortexInList, MotorcortexOut, MotorcortexOutList
 import motorcortex
 import time
+import rospkg
+
+# get an instance of RosPack with the default search paths
+rospack = rospkg.RosPack()
+
+# get the file path for ros_ethercat
+path = rospack.get_path('ros_ethercat')
+api_path = path + '/src/motorcortex_api/motorcortex-msg'
 
 SERVER = 'localhost'
 
@@ -37,7 +45,7 @@ class Control(object):
         # Loading protobuf types and hashes
         motorcortex_types = motorcortex.MessageTypes()
         self.motorcortex_msg, = motorcortex_types.load(
-            [{'proto': './motorcortex_api/motorcortex-msg/motorcortex_pb2.py', 'hash': './motorcortex_api/motorcortex-msg/motorcortex_hash.json'}])
+            [{'proto': api_path + '/motorcortex_pb2.py', 'hash': api_path + '/motorcortex_hash.json'}])
         motorcortex_msg = self.motorcortex_msg
 
         # Open request connection
