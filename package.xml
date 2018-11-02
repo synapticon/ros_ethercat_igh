@@ -2,12 +2,10 @@
 <package format="2">
   <name>ros_ethercat</name>
   <version>0.0.0</version>
-  <description>The ros_ethercat package</description>
+  <description>ROS EtherCAT package based on IgH EtherCAT Master for Linux and Motorcortex Core Library</description>
 
-  <!-- One maintainer tag required, multiple allowed, one person per tag -->
-  <!-- Example:  -->
-  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="slava@todo.todo">slava</maintainer>
+  <maintainer email="vtretyakov@synapticon.com">Slava Tretyakov</maintainer>
+  <maintainer email="alexey.zakharov@vectioneer.com">Alexey Zakharov</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
