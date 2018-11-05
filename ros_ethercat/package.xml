@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ros_ethercat</name>
+  <version>0.0.0</version>
+  <description>
+    ROS EtherCAT meta-package
+  </description>
+
+  <maintainer email="vtretyakov@synapticon.com">Slava Tretyakov</maintainer>
+  <maintainer email="alexey.zakharov@vectioneer.com">Alexey Zakharov</maintainer>
+  
+  <license>TODO</license>
+
+  <author email="support@synapticon.com">Synapticon GmbH</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>ethercat_master</exec_depend>
+  <exec_depend>motion_control</exec_depend>
+
+  <export><metapackage/></export>
+</package>
+

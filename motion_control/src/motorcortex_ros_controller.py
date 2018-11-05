@@ -13,7 +13,7 @@ import rospkg
 rospack = rospkg.RosPack()
 
 # get the file path for ros_ethercat
-path = rospack.get_path('ros_ethercat')
+path = rospack.get_path('motion_control')
 api_path = path + '/src/motorcortex_api/motorcortex-msg'
 
 SERVER = 'localhost'
