@@ -6,6 +6,8 @@
 
 #include <mcx/mcx_core.h>
 
+#include <ros/package.h>
+
 using namespace mcx;
 
 void run(const utils::CommandLineArgs &cmd_args) {
@@ -112,10 +114,11 @@ void run(const utils::CommandLineArgs &cmd_args) {
 int main(int argc, char **argv) {
 
     using namespace utils;
+    std::string ros_package_path = ros::package::getPath("ethercat_master");
 
 // default settings
     utils::CommandLineArgs command_line_args;
-    command_line_args.config_path = "../config";
+    command_line_args.config_path = ros_package_path + "/src/config";
     command_line_args.log_path = "/var/log/motorcortex";
     command_line_args.system_type = 0;
     command_line_args.system_mode = SystemMode::PRODUCTION;
