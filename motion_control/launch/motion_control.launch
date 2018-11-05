@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="motion_control" name="ros_motion_controler" type="motorcortex_ros_controller.py" output="screen">
+    </node>
+</launch>
