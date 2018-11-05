@@ -7,6 +7,7 @@
 #include <mcx/mcx_core.h>
 
 #include <ros/package.h>
+#include "ros/ros.h"
 
 using namespace mcx;
 
@@ -113,8 +114,10 @@ void run(const utils::CommandLineArgs &cmd_args) {
 
 int main(int argc, char **argv) {
 
-    using namespace utils;
+    ros::init(argc, argv, "ethercat_master_server");
     std::string ros_package_path = ros::package::getPath("ethercat_master");
+
+    using namespace utils;
 
 // default settings
     utils::CommandLineArgs command_line_args;
@@ -134,8 +137,11 @@ int main(int argc, char **argv) {
 
 // starts low latency, isolates CPU 0 and 1
     utils::startRealTime({0, 1});
-// runs awsome controls
-    run(command_line_args);
+// runs awesome controls
+    if (ros::ok()) {
+        run(command_line_args);
+    }
+
 // stops low latency, removes CPU isolation
     utils::stopRealTime();
 
