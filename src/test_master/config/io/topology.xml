@@ -1,0 +1,587 @@
+<?xml version="1.0" ?>
+<EtherCATInfoList>
+  <EtherCATInfo>
+    <!-- Slave 0 -->
+    <Vendor>
+      <Id>8914</Id>
+    </Vendor>
+    <Descriptions>
+      <Devices>
+        <Device>
+          <Type ProductCode="#x00000201" RevisionNo="#x0a000002"></Type>
+          <Name><![CDATA[SOMANET CiA402 Drive]]></Name>
+          <Sm Enable="1" StartAddress="#x1000" ControlByte="#x26" DefaultSize="1024" />
+          <Sm Enable="1" StartAddress="#x1400" ControlByte="#x22" DefaultSize="1024" />
+          <Sm Enable="1" StartAddress="#x1800" ControlByte="#x24" DefaultSize="27" />
+          <Sm Enable="1" StartAddress="#x2400" ControlByte="#x20" DefaultSize="45" />
+          <RxPdo Sm="2" Fixed="1" Mandatory="1">
+            <Index>#x1600</Index>
+            <Name>Rx PDO Mapping</Name>
+            <Entry>
+              <Index>#x6040</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Controlword</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6060</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>8</BitLen>
+              <Name>Op Mode</Name>
+              <DataType>UINT8</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6071</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Target Torque</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x607a</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Target Position</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x60ff</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Target Velocity</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x60b2</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Torque offset</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2701</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Tuning command</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2601</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 1</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2602</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 2</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2603</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 3</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2604</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 4</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2703</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>User MOSI</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+          </RxPdo>
+          <TxPdo Sm="3" Fixed="1" Mandatory="1">
+            <Index>#x1a00</Index>
+            <Name>Tx PDO Mapping</Name>
+            <Entry>
+              <Index>#x6041</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Statusword</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6061</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>8</BitLen>
+              <Name>Op Mode Display</Name>
+              <DataType>UINT8</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6064</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Position Value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x606c</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Velocity Value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6077</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Torque Value</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x230a</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Secondary position value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x230b</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Secondary velocity value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2401</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 1</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2402</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 2</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2403</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 3</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2404</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 4</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2702</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Tuning status</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2501</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 1</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2502</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 2</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2503</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 3</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2504</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 4</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2704</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>User MISO</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x20f0</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Timestamp</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+          </TxPdo>
+        </Device>
+      </Devices>
+    </Descriptions>
+  </EtherCATInfo>
+  <EtherCATInfo>
+    <!-- Slave 1 -->
+    <Vendor>
+      <Id>8914</Id>
+    </Vendor>
+    <Descriptions>
+      <Devices>
+        <Device>
+          <Type ProductCode="#x00000201" RevisionNo="#x0a000002"></Type>
+          <Name><![CDATA[SOMANET CiA402 Drive]]></Name>
+          <Sm Enable="1" StartAddress="#x1000" ControlByte="#x26" DefaultSize="1024" />
+          <Sm Enable="1" StartAddress="#x1400" ControlByte="#x22" DefaultSize="1024" />
+          <Sm Enable="1" StartAddress="#x1800" ControlByte="#x24" DefaultSize="27" />
+          <Sm Enable="1" StartAddress="#x2400" ControlByte="#x20" DefaultSize="45" />
+          <RxPdo Sm="2" Fixed="1" Mandatory="1">
+            <Index>#x1600</Index>
+            <Name>Rx PDO Mapping</Name>
+            <Entry>
+              <Index>#x6040</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Controlword</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6060</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>8</BitLen>
+              <Name>Op Mode</Name>
+              <DataType>UINT8</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6071</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Target Torque</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x607a</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Target Position</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x60ff</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Target Velocity</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x60b2</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Torque offset</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2701</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Tuning command</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2601</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 1</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2602</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 2</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2603</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 3</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2604</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Output 4</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2703</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>User MOSI</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+          </RxPdo>
+          <TxPdo Sm="3" Fixed="1" Mandatory="1">
+            <Index>#x1a00</Index>
+            <Name>Tx PDO Mapping</Name>
+            <Entry>
+              <Index>#x6041</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Statusword</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6061</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>8</BitLen>
+              <Name>Op Mode Display</Name>
+              <DataType>UINT8</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6064</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Position Value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x606c</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Velocity Value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x6077</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Torque Value</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x230a</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Secondary position value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x230b</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Secondary velocity value</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2401</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 1</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2402</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 2</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2403</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 3</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2404</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>16</BitLen>
+              <Name>Analog input 4</Name>
+              <DataType>UINT16</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2702</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Tuning status</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2501</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 1</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2502</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 2</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2503</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 3</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2504</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>1</BitLen>
+              <Name>Digital Input 4</Name>
+              <DataType>BOOL</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2007</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>7</BitLen>
+              <Name></Name>
+              <DataType>BIT7</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x2704</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>User MISO</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+            <Entry>
+              <Index>#x20f0</Index>
+              <SubIndex>0</SubIndex>
+              <BitLen>32</BitLen>
+              <Name>Timestamp</Name>
+              <DataType>UINT32</DataType>
+            </Entry>
+          </TxPdo>
+        </Device>
+      </Devices>
+    </Descriptions>
+  </EtherCATInfo>
+</EtherCATInfoList>
