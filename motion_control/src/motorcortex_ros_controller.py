@@ -37,7 +37,7 @@ class Control(object):
         self.watchdog = Watchdog()
 
         # set loop rate
-        rate = rospy.Rate(1000)  # Hz
+        rate = rospy.Rate(100)  # Hz
         rospy.Subscriber("/motorcortex_control", MotorcortexOutList, self.ctrl_callback)
         feedback_pub = rospy.Publisher('/motorcortex_feedback', MotorcortexInList,
                                        queue_size=1)
@@ -129,12 +129,46 @@ class Control(object):
         drive2 = motorcortex_control.drive_command[1]
 
         #control word and opmode are commanded to cia402 to a single input
-        replyHandle = self.request.setParameterList([{'path': 'root/cia402/actualState', 'value': drive1.controlword},
-                                       {'path': 'root/cia402/actualMode', 'value': drive1.opmode},
-                                       {'path': 'root/EtherCAT/Domain1/axis1/Out/Target Position',
+        replyHandle = self.request.setParameterList([
+                                        # CiA402
+                                        {'path': 'root/cia402/actualState',
+                                         'value': drive1.controlword}, # FixMe: it shouldn't be that a message for one drive commands the others
+                                        {'path': 'root/cia402/actualMode',
+                                         'value': drive1.opmode}, # FixMe: it shouldn't be that a message for one drive commands the others
+                                        # Drive 1
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Target Position',
                                         'value': drive1.target_position},
-                                       {'path': 'root/EtherCAT/Domain1/axis2/Out/Target Position',
-                                        'value': drive2.target_position}])
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Target Velocity',
+                                        'value': drive1.target_velocity},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Target Torque',
+                                         'value': drive1.target_torque},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Torque offset',
+                                         'value': drive1.torque_offset},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Digital Output 1',
+                                         'value': drive1.digital_outputs[0]},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Digital Output 2',
+                                         'value': drive1.digital_outputs[1]},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Digital Output 3',
+                                         'value': drive1.digital_outputs[2]},
+                                        {'path': 'root/EtherCAT/Domain1/axis1/Out/Digital Output 4',
+                                         'value': drive1.digital_outputs[3]},
+                                        # Drive 2
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Target Position',
+                                        'value': drive2.target_position},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Target Velocity',
+                                         'value': drive2.target_velocity},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Target Torque',
+                                         'value': drive2.target_torque},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Torque offset',
+                                         'value': drive2.torque_offset},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Digital Output 1',
+                                         'value': drive2.digital_outputs[0]},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Digital Output 2',
+                                         'value': drive2.digital_outputs[1]},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Digital Output 3',
+                                         'value': drive2.digital_outputs[2]},
+                                        {'path': 'root/EtherCAT/Domain1/axis2/Out/Digital Output 4',
+                                         'value': drive2.digital_outputs[3]}])
 
         # replyValue = replyHandle.get()  # Waiting for status reply
         # if replyValue.status != self.motorcortex_msg.OK:

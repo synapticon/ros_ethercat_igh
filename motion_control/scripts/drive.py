@@ -18,12 +18,25 @@ class Drive(object):
 
     def __init__(self, id):
         self.id = id
+        self.digitalOutputs = [False,False,False,False]
+        self.targetPosition = None
+        self.targetVelocity = 0
+        self.targetTorque = 0
+        self.torqueOffset = 0
+
 
     def update(self, statusMsg):
-        self.enabled = statusMsg.drive_enabled
-        self.actualPosition = statusMsg.position_value
         self.status = statusMsg.statusword
+        self.enabled = statusMsg.drive_enabled
         self.errorCode = statusMsg.drive_error_code
+        self.slaveTimestamp = statusMsg.slave_timestamp
+        self.actualPosition = statusMsg.position_value
+        self.actualVelocity = statusMsg.velocity_value
+        self.actualTorque = statusMsg.torque_value
+        self.actualSecondaryPosition = statusMsg.secondary_position_value
+        self.actualSecondaryVelocity = statusMsg.secondary_velocity_value
+        self.analogInputs = statusMsg.analog_inputs
+        self.digitalInputs = statusMsg.digital_inputs
 
     def getId(self):
         return self.id
@@ -34,8 +47,41 @@ class Drive(object):
     def setPosition(self, position):
         self.targetPosition = position
 
+    def setVelocity(self, velocity):
+        self.targetVelocity = velocity
+
+    def setTorque(self, torque):
+        self.targetTorque = torque
+
+    def setTorqueOffset(self, torque_offset):
+        self.torqueOffset = torque_offset
+
+    def setDigitalOutputs(self, digital_outputs):
+        self.digitalOutputs = digital_outputs
+
+    def getTimestamp(self):
+        return self.slaveTimestamp
+
     def getPosition(self):
         return self.actualPosition
+
+    def getVelocity(self):
+        return self.actualVelocity
+
+    def getTorque(self):
+        return self.actualTorque
+
+    def getSecondaryPosition(self):
+        return self.actualSecondaryPosition
+
+    def getSecondaryVelocity(self):
+        return self.actualSecondaryVelocity
+
+    def getAnalogInputs(self):
+        return self.analogInputs
+
+    def getDigitalInputs(self):
+        return self.digitalInputs
 
     def setMode(self, mode):
         self.mode = mode
@@ -57,5 +103,9 @@ class Drive(object):
         ctrl_msg.controlword = self.command
         ctrl_msg.opmode = self.mode
         ctrl_msg.target_position = self.targetPosition
+        ctrl_msg.target_velocity = self.targetVelocity
+        ctrl_msg.target_torque = self.targetTorque
+        ctrl_msg.torque_offset = self.torqueOffset
+        ctrl_msg.digital_outputs = self.digitalOutputs
 
         return ctrl_msg
