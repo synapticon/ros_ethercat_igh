@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from motorcortex_ros.msg import MotorcortexOut
+from motion_control.msg import MotorcortexOut
 
 DRIVE_OFF = 2
 DRIVE_ON = 4

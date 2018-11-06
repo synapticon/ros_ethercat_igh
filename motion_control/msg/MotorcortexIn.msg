@@ -1,4 +1,11 @@
 int32 statusword
-int32 position_value
 bool drive_enabled
 int32 drive_error_code
+uint32 slave_timestamp
+int32 position_value
+int32 velocity_value
+int16 torque_value
+int32 secondary_position_value
+int32 secondary_velocity_value
+uint16[] analog_inputs
+bool[] digital_inputs

@@ -5,7 +5,7 @@ from __future__ import print_function, division
 import rospy
 from drive import Drive
 
-from motorcortex_ros.msg import MotorcortexOutList, MotorcortexInList
+from motion_control.msg import MotorcortexOutList, MotorcortexInList
 from time import sleep
 
 
