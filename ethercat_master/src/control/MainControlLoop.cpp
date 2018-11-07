@@ -9,14 +9,38 @@ using namespace mcx;
 
 void MainControlLoop::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
     sub_ = nh_.subscribe<std_msgs::String>("/command", 10, &MainControlLoop::controlCallback, this);
-    pub_  = nh_.advertise<std_msgs::String>("/feedback", 1);
-    count_ = 0;
+    pub_ = nh_.advertise<motion_control::MotorcortexIn>("/motorcortex_feedback", 1);
 }
 
 bool MainControlLoop::initPhase1_() {
 
-    addParameter("inputVelocity", mcx::parameter_server::ParameterType::INPUT, &input_velocity_);
+
+    for (int i = 0; i < 4; i++) {
+        driveFeedback_.analog_inputs.push_back(0);
+        driveFeedback_.digital_inputs.push_back(0);
+    }
+
+    //addParameter("", mcx::parameter_server::ParameterType::INPUT, &);
+    addParameter("statusword", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.statusword);
+    addParameter("driveEnabled", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_enabled);
+    addParameter("driveErrorCode", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_error_code);
+    addParameter("slaveTimestamp", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.slave_timestamp);
+    addParameter("positionValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.position_value);
+    addParameter("velocityValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.velocity_value);
+    addParameter("torqueValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.torque_value);
+    addParameter("secondaryPositionValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.secondary_position_value);
+    addParameter("secondaryVelocityValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.secondary_velocity_value);
+    addParameter("analogInput1", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.analog_inputs[0]);
+    addParameter("analogInput2", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.analog_inputs[1]);
+    addParameter("analogInput3", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.analog_inputs[2]);
+    addParameter("analogInput4", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.analog_inputs[3]);
+    addParameter("digitalInput1", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[0]);
+    addParameter("digitalInput2", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[1]);
+    addParameter("digitalInput3", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[2]);
+    addParameter("digitalInput4", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[3]);
+
     addParameter("outputVelocity", mcx::parameter_server::ParameterType::OUTPUT, &output_velocity_);
+
     addParameter("gain", mcx::parameter_server::ParameterType::PARAMETER, &gain_);
 
     return true;
@@ -38,13 +62,7 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
 
     output_velocity_ = input_velocity_ *gain_;
 
-    std_msgs::String msg;
-    std::stringstream ss;
-    ss << "running " << count_;
-    msg.data = ss.str();
-
-    pub_.publish(msg);
-    count_++;
+    pub_.publish(driveFeedback_);
 
     ros::spinOnce();
 

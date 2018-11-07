@@ -8,6 +8,7 @@
 #include <mcx/mcx_core.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "motion_control/MotorcortexIn.h"
 
 class MainControlLoop : public mcx::container::Module {
 public:
@@ -39,7 +40,8 @@ private:
     ros::NodeHandle nh_;
     ros::Subscriber sub_;
     ros::Publisher pub_;
-    int count_;
+    motion_control::MotorcortexIn driveFeedback_;
+
 
 };
 
