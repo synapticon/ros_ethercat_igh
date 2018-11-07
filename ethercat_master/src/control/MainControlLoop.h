@@ -8,7 +8,8 @@
 #include <mcx/mcx_core.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "motion_control/MotorcortexIn.h"
+#include "Drive.h"
+#include "motion_control/MotorcortexInList.h"
 
 class MainControlLoop : public mcx::container::Module {
 public:
@@ -32,15 +33,10 @@ private:
 
     bool iterateOp_(const mcx::container::TaskTime &system_time, mcx::container::UserTime *user_time) override;
 
-
-    double input_velocity_;
-    double output_velocity_;
-    double gain_;
-
     ros::NodeHandle nh_;
     ros::Subscriber sub_;
     ros::Publisher pub_;
-    motion_control::MotorcortexIn driveFeedback_;
+    std::array<Drive, 2> drives_;
 
 
 };

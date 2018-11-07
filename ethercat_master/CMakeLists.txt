@@ -24,7 +24,7 @@ include_directories(
 #add_subdirectory(control)
 #add_subdirectory(logic)
 
-add_executable(ethercat_master_server src/main.cpp src/control/MainControlLoop.cpp)
+add_executable(ethercat_master_server src/main.cpp src/control/MainControlLoop.cpp src/control/Drive.h src/control/Drive.cpp)
 target_compile_options(ethercat_master_server PUBLIC -DPB_FIELD_32BIT -DLOG_LEVEL_INFO -DENABLE_ASSERT)
 target_link_libraries(ethercat_master_server mcx-core ${catkin_LIBRARIES})
 

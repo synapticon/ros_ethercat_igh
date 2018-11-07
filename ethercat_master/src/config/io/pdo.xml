@@ -7,11 +7,11 @@
         </Pdo>
         <Pdo Entry="6064:0" Group="In" Name="Position Value">
             <DataType>INT32</DataType>
-            <Link>root/Control/positionValue</Link>
+            <Link>root/Control/axis0/positionValue</Link>
         </Pdo>
         <Pdo Entry="606c:0" Group="In" Name="Velocity Value">
             <DataType>INT32</DataType>
-            <Link>root/Control/velocityValue</Link>
+            <Link>root/Control/axis0/velocityValue</Link>
         </Pdo>
         <Pdo Entry="6077:0" Group="In" Name="Torque Value">
             <DataType>INT16</DataType>
@@ -90,9 +90,11 @@
         </Pdo>
         <Pdo Entry="6064:0" Group="In" Name="Position Value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/positionValue</Link>
         </Pdo>
         <Pdo Entry="606c:0" Group="In" Name="Velocity Value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/velocityValue</Link>
         </Pdo>
         <Pdo Entry="6077:0" Group="In" Name="Torque Value">
             <DataType>INT16</DataType>
