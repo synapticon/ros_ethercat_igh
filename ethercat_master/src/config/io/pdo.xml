@@ -61,27 +61,35 @@
         <!-- Rx PDO Mapping -->
         <Pdo Entry="607a:0" Group="Out" Name="Target Position">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis0/targetPosition</Link>
         </Pdo>
         <Pdo Entry="60ff:0" Group="Out" Name="Target Velocity">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis0/targetVelocity</Link>
         </Pdo>
         <Pdo Entry="6071:0" Group="Out" Name="Target Torque">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis0/targetTorque</Link>
         </Pdo>
         <Pdo Entry="60b2:0" Group="Out" Name="Torque offset">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis0/torqueOffset</Link>
         </Pdo>
         <Pdo Entry="2601:0" Group="Out" Name="Digital Output 1">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalOutput1</Link>
         </Pdo>
         <Pdo Entry="2602:0" Group="Out" Name="Digital Output 2">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalOutput2</Link>
         </Pdo>
         <Pdo Entry="2603:0" Group="Out" Name="Digital Output 3">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalOutput3</Link>
         </Pdo>
         <Pdo Entry="2604:0" Group="Out" Name="Digital Output 4">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalOutput4</Link>
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
@@ -90,9 +98,11 @@
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
             <Link Index="0">root/cia402/driveControlWord</Link>
+            <Link>root/Control/axis0/controlword</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
             <Link Index="0">root/cia402/driveOpMode</Link>
+            <Link>root/Control/axis0/opmode</Link>
         </Pdo>
 
     </Device>
@@ -157,27 +167,35 @@
         <!-- Rx PDO Mapping -->
         <Pdo Entry="607a:0" Group="Out" Name="Target Position">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/targetPosition</Link>
         </Pdo>
         <Pdo Entry="60ff:0" Group="Out" Name="Target Velocity">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/targetVelocity</Link>
         </Pdo>
         <Pdo Entry="6071:0" Group="Out" Name="Target Torque">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis1/targetTorque</Link>
         </Pdo>
         <Pdo Entry="60b2:0" Group="Out" Name="Torque offset">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis1/torqueOffset</Link>
         </Pdo>
         <Pdo Entry="2601:0" Group="Out" Name="Digital Output 1">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalOutput1</Link>
         </Pdo>
         <Pdo Entry="2602:0" Group="Out" Name="Digital Output 2">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalOutput2</Link>
         </Pdo>
         <Pdo Entry="2603:0" Group="Out" Name="Digital Output 3">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalOutput3</Link>
         </Pdo>
         <Pdo Entry="2604:0" Group="Out" Name="Digital Output 4">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalOutput4</Link>
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
@@ -186,9 +204,11 @@
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
             <Link Index="1">root/cia402/driveControlWord</Link>
+            <Link>root/Control/axis1/controlword</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
             <Link Index="1">root/cia402/driveOpMode</Link>
+            <Link>root/Control/axis1/opmode</Link>
         </Pdo>
     </Device>
 </Domain>

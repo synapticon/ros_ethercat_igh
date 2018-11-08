@@ -6,7 +6,7 @@
 
 using namespace mcx;
 
-void Drive::create_(const char* name, parameter_server::Parameter* parameter_server, uint64_t dt_micro_s) {
+void Drive::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
 
 }
 
@@ -14,8 +14,8 @@ bool Drive::initPhase1_() {
 
     driveFeedback_.analog_inputs.reserve(4);
     driveFeedback_.digital_inputs.reserve(4);
+    driveCommand_.digital_outputs.reserve(4);
 
-    //addParameter("", mcx::parameter_server::ParameterType::INPUT, &);
     addParameter("statusword", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.statusword);
     addParameter("driveEnabled", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_enabled);
     addParameter("driveErrorCode", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_error_code);
@@ -34,21 +34,32 @@ bool Drive::initPhase1_() {
     addParameter("digitalInput3", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[2]);
     addParameter("digitalInput4", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.digital_inputs[3]);
 
-  return true;
+    addParameter("controlword", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.controlword);
+    addParameter("opmode", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.opmode);
+    addParameter("targetPosition", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.target_position);
+    addParameter("targetVelocity", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.target_velocity);
+    addParameter("targetTorque", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.target_torque);
+    addParameter("torqueOffset", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.torque_offset);
+    addParameter("digitalOutput1", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.digital_outputs[0]);
+    addParameter("digitalOutput2", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.digital_outputs[1]);
+    addParameter("digitalOutput3", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.digital_outputs[2]);
+    addParameter("digitalOutput4", mcx::parameter_server::ParameterType::OUTPUT, &driveCommand_.digital_outputs[3]);
+
+    return true;
 }
 
 bool Drive::initPhase2_() {
-  return true;
+    return true;
 }
 
 bool Drive::startOp_() {
-  return true;
+    return true;
 }
 
 bool Drive::stopOp_() {
-  return true;
+    return true;
 }
 
-bool Drive::iterateOp_(const container::TaskTime& system_time, container::UserTime* user_time) {
-  return true;
+bool Drive::iterateOp_(const container::TaskTime &system_time, container::UserTime *user_time) {
+    return true;
 }
