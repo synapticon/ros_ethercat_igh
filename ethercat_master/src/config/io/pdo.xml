@@ -4,6 +4,7 @@
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">
             <DataType>UINT32</DataType>
+            <Link>root/Control/axis0/slaveTimestamp</Link>
         </Pdo>
         <Pdo Entry="6064:0" Group="In" Name="Position Value">
             <DataType>INT32</DataType>
@@ -15,36 +16,47 @@
         </Pdo>
         <Pdo Entry="6077:0" Group="In" Name="Torque Value">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis0/torqueValue</Link>
         </Pdo>
         <Pdo Entry="230a:0" Group="In" Name="Secondary position value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis0/secondaryPositionValue</Link>
         </Pdo>
         <Pdo Entry="230b:0" Group="In" Name="Secondary velocity value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis0/secondaryVelocityValue</Link>
         </Pdo>
         <Pdo Entry="2401:0" Group="In" Name="Analog input 1">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis0/analogInput1</Link>
         </Pdo>
         <Pdo Entry="2402:0" Group="In" Name="Analog input 2">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis0/analogInput2</Link>
         </Pdo>
         <Pdo Entry="2403:0" Group="In" Name="Analog input 3">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis0/analogInput3</Link>
         </Pdo>
         <Pdo Entry="2404:0" Group="In" Name="Analog input 4">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis0/analogInput4</Link>
         </Pdo>
         <Pdo Entry="2501:0" Group="In" Name="Digital Input 1">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalInput1</Link>
         </Pdo>
         <Pdo Entry="2502:0" Group="In" Name="Digital Input 2">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalInput2</Link>
         </Pdo>
         <Pdo Entry="2503:0" Group="In" Name="Digital Input 3">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalInput3</Link>
         </Pdo>
         <Pdo Entry="2504:0" Group="In" Name="Digital Input 4">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis0/digitalInput4</Link>
         </Pdo>
         <!-- Rx PDO Mapping -->
         <Pdo Entry="607a:0" Group="Out" Name="Target Position">
@@ -74,6 +86,7 @@
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
             <Link Index="0">root/cia402/driveStatusWord</Link>
+            <Link>root/Control/axis0/statusword</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
             <Link Index="0">root/cia402/driveControlWord</Link>
@@ -87,6 +100,7 @@
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">
             <DataType>UINT32</DataType>
+            <Link>root/Control/axis1/slaveTimestamp</Link>
         </Pdo>
         <Pdo Entry="6064:0" Group="In" Name="Position Value">
             <DataType>INT32</DataType>
@@ -98,36 +112,47 @@
         </Pdo>
         <Pdo Entry="6077:0" Group="In" Name="Torque Value">
             <DataType>INT16</DataType>
+            <Link>root/Control/axis1/torqueValue</Link>
         </Pdo>
         <Pdo Entry="230a:0" Group="In" Name="Secondary position value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/secondaryPositionValue</Link>
         </Pdo>
         <Pdo Entry="230b:0" Group="In" Name="Secondary velocity value">
             <DataType>INT32</DataType>
+            <Link>root/Control/axis1/secondaryVelocityValue</Link>
         </Pdo>
         <Pdo Entry="2401:0" Group="In" Name="Analog input 1">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis1/analogInput1</Link>
         </Pdo>
         <Pdo Entry="2402:0" Group="In" Name="Analog input 2">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis1/analogInput2</Link>
         </Pdo>
         <Pdo Entry="2403:0" Group="In" Name="Analog input 3">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis1/analogInput3</Link>
         </Pdo>
         <Pdo Entry="2404:0" Group="In" Name="Analog input 4">
             <DataType>UINT16</DataType>
+            <Link>root/Control/axis1/analogInput4</Link>
         </Pdo>
         <Pdo Entry="2501:0" Group="In" Name="Digital Input 1">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalInput1</Link>
         </Pdo>
         <Pdo Entry="2502:0" Group="In" Name="Digital Input 2">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalInput2</Link>
         </Pdo>
         <Pdo Entry="2503:0" Group="In" Name="Digital Input 3">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalInput3</Link>
         </Pdo>
         <Pdo Entry="2504:0" Group="In" Name="Digital Input 4">
             <DataType>BOOL</DataType>
+            <Link>root/Control/axis1/digitalInput4</Link>
         </Pdo>
         <!-- Rx PDO Mapping -->
         <Pdo Entry="607a:0" Group="Out" Name="Target Position">
@@ -157,6 +182,7 @@
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
             <Link Index="1">root/cia402/driveStatusWord</Link>
+            <Link>root/Control/axis1/statusword</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
             <Link Index="1">root/cia402/driveControlWord</Link>
