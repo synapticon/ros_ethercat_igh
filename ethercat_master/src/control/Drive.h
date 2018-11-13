@@ -6,19 +6,30 @@
 #define DRIVE_H
 
 #include <mcx/mcx_core.h>
+
+#include "Cia402FsmBase.h"
+#include "Cia402FsmData.h"
+#include "Cia402FsmTransition.h"
+#include "DriveDef.h"
+
 #include "motion_control/MotorcortexIn.h"
 #include "motion_control/MotorcortexOut.h"
 
 
 class Drive : public mcx::container::Module {
+    using Cia402StateMachine = mcx::state_machine::StateMachine<Cia402FsmBase>;
 public:
 
-    Drive() = default;
+    Drive();
 
     ~Drive() override = default;
 
     const motion_control::MotorcortexIn &getDriveFeedback() const {
         return driveFeedback_;
+    }
+
+    void setDriveCommand(const motion_control::MotorcortexOut& driveCommand) {
+        driveCommand_ = driveCommand;
     }
 
 private:
@@ -37,6 +48,14 @@ private:
     motion_control::MotorcortexIn driveFeedback_;
 
     motion_control::MotorcortexOut driveCommand_;
+    decltype(driveCommand_.controlword) oldControlWord{};
+    decltype(driveCommand_.opmode) opmode{};
+
+
+    Cia402StateMachine sm_;
+    Cia402FsmData sm_data_{};
+    Transition sm_transition_;
+    mcx::parameter_server::ParamHandle drive_cmd_handle_;
 
 };
 

@@ -93,16 +93,13 @@
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
-            <Link Index="0">root/cia402/driveStatusWord</Link>
-            <Link>root/Control/axis0/statusword</Link>
+            <Link>root/Control/axis0/cia402StateIn</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
-            <Link Index="0">root/cia402/driveControlWord</Link>
-            <Link>root/Control/axis0/controlword</Link>
+            <Link>root/Control/axis0/cia402CmdOut</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
-            <Link Index="0">root/cia402/driveOpMode</Link>
-            <Link>root/Control/axis0/opmode</Link>
+            <Link>root/Control/axis0/cia402OpmodeOut</Link>
         </Pdo>
 
     </Device>
@@ -199,16 +196,88 @@
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
-            <Link Index="1">root/cia402/driveStatusWord</Link>
-            <Link>root/Control/axis1/statusword</Link>
+            <Link>root/Control/axis1/cia402StateIn</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
-            <Link Index="1">root/cia402/driveControlWord</Link>
-            <Link>root/Control/axis1/controlword</Link>
+            <Link>root/Control/axis1/cia402CmdOut</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
-            <Link Index="1">root/cia402/driveOpMode</Link>
-            <Link>root/Control/axis1/opmode</Link>
+            <Link>root/Control/axis1/cia402OpmodeOut</Link>
+        </Pdo>
+    </Device>
+    <Device Id="2" Name="device1">
+        <Pdo Entry="3001:1" Group="In" Name="Digital Input 1">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3002:1" Group="In" Name="Digital Input 2">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3003:1" Group="In" Name="Digital Input 3">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3004:1" Group="In" Name="Digital Input 4">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3005:1" Group="In" Name="Digital Input 5">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3006:1" Group="In" Name="Digital Input 6">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3007:1" Group="In" Name="Digital Input 7">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3008:1" Group="In" Name="Digital Input 8">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3009:1" Group="In" Name="Digital Input 9">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="300a:1" Group="In" Name="Digital Input 10">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="300b:1" Group="In" Name="Digital Input 11">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="300c:1" Group="In" Name="Digital Input 12">
+            <DataType>BOOL</DataType>
+        </Pdo>
+
+        <Pdo Entry="3101:1" Group="Out" Name="Digital Output 1">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3102:1" Group="Out" Name="Digital Output 2">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3103:1" Group="Out" Name="Digital Output 3">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3104:1" Group="Out" Name="Digital Output 4">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3105:1" Group="Out" Name="Digital Output 5">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3106:1" Group="Out" Name="Digital Output 6">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3107:1" Group="Out" Name="Digital Output 7">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3108:1" Group="Out" Name="Digital Output 8">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="3109:1" Group="Out" Name="Digital Output 9">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="310a:1" Group="Out" Name="Digital Output 10">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="310b:1" Group="Out" Name="Digital Output 11">
+            <DataType>BOOL</DataType>
+        </Pdo>
+        <Pdo Entry="310c:1" Group="Out" Name="Digital Output 12">
+            <DataType>BOOL</DataType>
         </Pdo>
     </Device>
 </Domain>

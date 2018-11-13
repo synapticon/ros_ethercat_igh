@@ -21,5 +21,6 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>motion_control</exec_depend>
   <exec_depend>roslib</exec_depend>
+  <exec_depend>message_generation</exec_depend>
 
 </package>

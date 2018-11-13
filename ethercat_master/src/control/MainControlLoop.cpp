@@ -8,7 +8,7 @@
 using namespace mcx;
 
 void MainControlLoop::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
-    sub_ = nh_.subscribe<std_msgs::String>("/command", 10, &MainControlLoop::controlCallback, this);
+    sub_ = nh_.subscribe<motion_control::MotorcortexOutList>("/motorcortex_control", 1, &MainControlLoop::controlCallback, this);
     pub_ = nh_.advertise<motion_control::MotorcortexInList>("/motorcortex_feedback", 1);
 
     std::string axisName = "axis";
@@ -53,6 +53,9 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
     return true;
 }
 
-void MainControlLoop::controlCallback(const std_msgs::String::ConstPtr &command_msg) {
-    std::cout << command_msg->data << std::endl;
+void MainControlLoop::controlCallback(const motion_control::MotorcortexOutList::ConstPtr &command_msg) {
+    unsigned int max_counter = std::min(drives_.size(), command_msg->drive_command.size());
+    for (unsigned int i = 0; i < max_counter; i++) {
+        drives_[i].setDriveCommand(command_msg->drive_command[i]);
+    }
 }
