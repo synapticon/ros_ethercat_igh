@@ -4,11 +4,11 @@ project(ethercat_master)
 set(CMAKE_CXX_STANDARD 14)
 
 find_package(catkin REQUIRED COMPONENTS
+  message_generation
+  motorcortex_msgs
   roscpp
   std_msgs
-  message_generation
   roslib
-  motion_control
 )
 
 catkin_package(

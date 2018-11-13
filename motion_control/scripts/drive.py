@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from motion_control.msg import MotorcortexOut
+from motorcortex_msgs.msg import MotorcortexOut
 from enum import Enum
 
 class DriveCommand(Enum):

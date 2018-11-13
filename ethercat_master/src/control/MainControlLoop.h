@@ -9,8 +9,8 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "Drive.h"
-#include "motion_control/MotorcortexInList.h"
-#include "motion_control/MotorcortexOutList.h"
+#include "motorcortex_msgs/MotorcortexInList.h"
+#include "motorcortex_msgs/MotorcortexOutList.h"
 
 class MainControlLoop : public mcx::container::Module {
 public:
@@ -19,7 +19,7 @@ public:
 
     ~MainControlLoop() override = default;
 
-    void controlCallback(const motion_control::MotorcortexOutList::ConstPtr& command_msg);
+    void controlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr& command_msg);
 
 private:
     void create_(const char *name, mcx::parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) override;
@@ -38,7 +38,7 @@ private:
     ros::Subscriber sub_;
     ros::Publisher pub_;
     std::array<Drive, 2> drives_;
-    motion_control::MotorcortexOutList motorcortexOutListMsg_;
+    motorcortex_msgs::MotorcortexOutList motorcortexOutListMsg_;
 
 
 };

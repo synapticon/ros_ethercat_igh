@@ -8,8 +8,8 @@
 using namespace mcx;
 
 void MainControlLoop::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
-    sub_ = nh_.subscribe<motion_control::MotorcortexOutList>("/motorcortex_control", 1, &MainControlLoop::controlCallback, this);
-    pub_ = nh_.advertise<motion_control::MotorcortexInList>("/motorcortex_feedback", 1);
+    sub_ = nh_.subscribe<motorcortex_msgs::MotorcortexOutList>("/motorcortex_control", 1, &MainControlLoop::controlCallback, this);
+    pub_ = nh_.advertise<motorcortex_msgs::MotorcortexInList>("/motorcortex_feedback", 1);
 
     std::string axisName = "axis";
     int counter = 0;
@@ -39,7 +39,7 @@ bool MainControlLoop::stopOp_() {
 
 bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, container::UserTime *user_time) {
 
-    motion_control::MotorcortexInList driveFeedbackList;
+    motorcortex_msgs::MotorcortexInList driveFeedbackList;
 
     for (auto &drive : drives_) {
         drive.iterate(system_time, user_time);
@@ -53,7 +53,7 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
     return true;
 }
 
-void MainControlLoop::controlCallback(const motion_control::MotorcortexOutList::ConstPtr &command_msg) {
+void MainControlLoop::controlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr &command_msg) {
     unsigned int max_counter = std::min(drives_.size(), command_msg->drive_command.size());
     for (unsigned int i = 0; i < max_counter; i++) {
         drives_[i].setDriveCommand(command_msg->drive_command[i]);
