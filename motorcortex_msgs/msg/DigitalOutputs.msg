@@ -1,0 +1,1 @@
+bool[] digital_outputs

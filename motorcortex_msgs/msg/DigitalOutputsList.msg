@@ -1,0 +1,1 @@
+DigitalOutputs[] devices_command

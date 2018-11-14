@@ -12,6 +12,10 @@ add_message_files(
   MotorcortexInList.msg
   MotorcortexOut.msg
   MotorcortexOutList.msg
+  DigitalInputs.msg
+  DigitalInputsList.msg
+  DigitalOutputs.msg
+  DigitalOutputsList.msg
 )
 
 ## Generate added messages and services with any dependencies listed here

@@ -40,9 +40,9 @@ void Drive::create_(const char *name, parameter_server::Parameter *parameter_ser
 
 bool Drive::initPhase1_() {
 
-    driveFeedback_.analog_inputs.reserve(4);
-    driveFeedback_.digital_inputs.reserve(4);
-    driveCommand_.digital_outputs.reserve(4);
+    driveFeedback_.analog_inputs.resize(4, 0);
+    driveFeedback_.digital_inputs.resize(4, 0);
+    driveCommand_.digital_outputs.resize(4, 0);
 
     addParameter("driveErrorCode", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_error_code);//FixMe: not implemented yet
     addParameter("slaveTimestamp", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.slave_timestamp);
