@@ -20,6 +20,10 @@ public:
         return digitalInputs_;
     }
 
+    void setDigitalOutputs(const motorcortex_msgs::DigitalOutputs& digitalOutputsCommand) {
+        digitalOutputs_ = digitalOutputsCommand;
+    }
+
 private:
     void create_(const char *name, mcx::parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) override;
 

@@ -22,7 +22,9 @@ public:
 
     ~MainControlLoop() override = default;
 
-    void controlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr& command_msg);
+    void drivesControlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr &drives_command_msg);
+
+    void diosControlCallback(const motorcortex_msgs::DigitalOutputsList::ConstPtr &dios_command_msg);
 
 private:
     void create_(const char *name, mcx::parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) override;
@@ -38,12 +40,12 @@ private:
     bool iterateOp_(const mcx::container::TaskTime &system_time, mcx::container::UserTime *user_time) override;
 
     ros::NodeHandle nh_;
-    ros::Subscriber sub_;
+    ros::Subscriber sub_drives_;
+    ros::Subscriber sub_dios_;
     ros::Publisher drive_feedback_pub_;
     ros::Publisher digital_inputs_pub_;
     std::array<Drive, 2> drives_;
     std::array<DigitalIO, 1> dio_devices_;
-    bool j_;
 
 };
 
