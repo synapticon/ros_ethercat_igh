@@ -96,7 +96,7 @@ void run(const utils::CommandLineArgs &cmd_args) {
     ASSERT(is_connected, "Failed to start Req/Rep server");
 
 // running until terminate signal is received
-    while (utils::running()) {
+    while (utils::running() && ros::ok()) {
         reqrep.iterate();
     }
 
@@ -114,6 +114,7 @@ void run(const utils::CommandLineArgs &cmd_args) {
 
 int main(int argc, char **argv) {
 
+    // ros node initialization
     ros::init(argc, argv, "ethercat_master_server");
     std::string ros_package_path = ros::package::getPath("ethercat_master");
 
@@ -138,9 +139,7 @@ int main(int argc, char **argv) {
 // starts low latency, isolates CPU 0 and 1
     utils::startRealTime({0, 1});
 // runs awesome controls
-    if (ros::ok()) {
-        run(command_line_args);
-    }
+    run(command_line_args);
 
 // stops low latency, removes CPU isolation
     utils::stopRealTime();
