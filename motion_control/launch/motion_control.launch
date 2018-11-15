@@ -1,7 +1,4 @@
 <launch>
     <node pkg="ethercat_master" name="ros_ethercat_server" type="ethercat_master_server" output="screen">
     </node>
-
-    <node pkg="motion_control" name="ros_motion_controler" type="motorcortex_ros_controller.py" output="screen">
-    </node>
 </launch>
