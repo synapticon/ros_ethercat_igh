@@ -21,6 +21,7 @@ class OpModesCiA402(Enum):
     CSP = 8
     CSV = 9
     CST = 10
+    NONE = 0
 
 class Drive(object):
     enabled = False
@@ -29,7 +30,7 @@ class Drive(object):
     status = 0
     errorCode = 0
     command = DriveCommand.DRIVE_CMD_OFF.value
-    mode = OpModesCiA402.CSP.value
+    mode = OpModesCiA402.NONE.value
 
     def __init__(self, id):
         self.id = id

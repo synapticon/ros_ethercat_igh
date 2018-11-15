@@ -3,7 +3,7 @@
 from __future__ import print_function, division
 
 import rospy
-from drive import Drive
+from drive import Drive, OpModesCiA402
 from dio import DIO
 
 from motorcortex_msgs.msg import MotorcortexOutList, MotorcortexInList, DigitalInputsList, DigitalOutputsList
@@ -47,9 +47,13 @@ def controller():
     rospy.on_shutdown(safe_off)
     r = rospy.Rate(100)#Hz
 
+    # set your test parameters here
+    opMode = OpModesCiA402.CSV.value
     positionIncrement = 1000
+    referenceVelocity = 500
+    referenceTorque = 50
+
     counter = 0
-    output_state = False
 
     # switch on here
     while not rospy.is_shutdown():
@@ -60,12 +64,20 @@ def controller():
                 print("drive %d has error"%drive.getId())
                 drive.resetError()
             else:
+                drive.setMode(opMode)
                 drive.switchOn()
 
             if drive.isEnabled():
-                drive.setPosition(drive.getPosition() + positionIncrement)
+                if opMode == OpModesCiA402.CSP.value:
+                    drive.setPosition(drive.getPosition() + positionIncrement)
+                elif opMode == OpModesCiA402.CSV.value:
+                    drive.setVelocity(referenceVelocity)
+                elif opMode == OpModesCiA402.CST.value:
+                    drive.setTorque(referenceTorque)
             else:
                 drive.setPosition(drive.getPosition())
+                drive.setVelocity(0)
+                drive.setTorque(0)
 
             drivesControlMsg.drive_command.append(drive.encode())
 
