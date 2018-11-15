@@ -1,5 +1,4 @@
 int32 statusword
-bool drive_enabled
 int32 drive_error_code
 uint32 slave_timestamp
 int32 position_value

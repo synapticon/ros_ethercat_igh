@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros_ethercat</name>
+  <name>motorcortex_msgs</name>
   <version>0.0.0</version>
   <description>
-    ROS EtherCAT meta-package
+    generic Motorcortex messages for communicating with EtherCAT slave devices
   </description>
 
   <maintainer email="vtretyakov@synapticon.com">Slava Tretyakov</maintainer>
@@ -15,10 +15,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>ethercat_master</exec_depend>
-  <exec_depend>motion_control</exec_depend>
-  <exec_depend>motorcortex_msgs</exec_depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
 
-  <export><metapackage/></export>
+  <export></export>
 </package>
-

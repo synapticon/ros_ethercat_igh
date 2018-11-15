@@ -1,11 +1,26 @@
 #!/usr/bin/env python
 
-from motion_control.msg import MotorcortexOut
+from motorcortex_msgs.msg import MotorcortexOut
+from enum import Enum
 
-DRIVE_OFF = 2
-DRIVE_ON = 4
-RESET_ERROR = 701
-POSITION_MODE = 1
+class DriveCommand(Enum):
+    DRIVE_CMD_OFF = 0x0
+    DRIVE_CMD_DISENGAGE = 0x1
+    DRIVE_CMD_ENGAGE = 0x2
+    DRIVE_CMD_FAULT_ACK = 0x3
+    DRIVE_CMD_QUICK_STOP = 0x4
+
+class DriveState(Enum):
+    DRIVE_STATUS_OFF = 0x0
+    DRIVE_STATUS_DISENGAGED = 0x1
+    DRIVE_STATUS_ENGAGED = 0x2
+    DRIVE_STATUS_FAULT = 0x3
+    DRIVE_STATUS_QUICK_STOP_ACTIVE = 0x4
+
+class OpModesCiA402(Enum):
+    CSP = 8
+    CSV = 9
+    CST = 10
 
 class Drive(object):
     enabled = False
@@ -13,8 +28,8 @@ class Drive(object):
     targetPosition = 0
     status = 0
     errorCode = 0
-    command = DRIVE_OFF
-    mode = POSITION_MODE
+    command = DriveCommand.DRIVE_CMD_OFF.value
+    mode = OpModesCiA402.CSP.value
 
     def __init__(self, id):
         self.id = id
@@ -27,7 +42,6 @@ class Drive(object):
 
     def update(self, statusMsg):
         self.status = statusMsg.statusword
-        self.enabled = statusMsg.drive_enabled
         self.errorCode = statusMsg.drive_error_code
         self.slaveTimestamp = statusMsg.slave_timestamp
         self.actualPosition = statusMsg.position_value
@@ -42,7 +56,7 @@ class Drive(object):
         return self.id
 
     def isEnabled(self):
-        return self.enabled
+        return self.status == DriveState.DRIVE_STATUS_ENGAGED.value
 
     def setPosition(self, position):
         self.targetPosition = position
@@ -87,16 +101,16 @@ class Drive(object):
         self.mode = mode
 
     def switchOn(self):
-        self.command = DRIVE_ON
+        self.command = DriveCommand.DRIVE_CMD_ENGAGE.value
 
     def switchOff(self):
-        self.command = DRIVE_OFF
+        self.command = DriveCommand.DRIVE_CMD_OFF.value
 
     def resetError(self):
-        self.command = RESET_ERROR
+        self.command = DriveCommand.DRIVE_CMD_FAULT_ACK.value
 
     def hasError(self):
-        return self.errorCode != 0
+        return self.status == DriveState.DRIVE_STATUS_FAULT.value
 
     def encode(self):
         ctrl_msg = MotorcortexOut()
