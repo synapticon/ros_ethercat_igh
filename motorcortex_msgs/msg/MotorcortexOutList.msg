@@ -1,1 +1,0 @@
-MotorcortexOut[] drive_command

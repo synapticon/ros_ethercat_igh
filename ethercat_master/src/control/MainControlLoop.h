@@ -10,8 +10,8 @@
 #include "std_msgs/String.h"
 #include "Drive.h"
 #include "DigitalIO.h"
-#include "motorcortex_msgs/MotorcortexInList.h"
-#include "motorcortex_msgs/MotorcortexOutList.h"
+#include "motorcortex_msgs/DriveInList.h"
+#include "motorcortex_msgs/DriveOutList.h"
 #include "motorcortex_msgs/DigitalInputsList.h"
 #include "motorcortex_msgs/DigitalOutputsList.h"
 
@@ -22,7 +22,7 @@ public:
 
     ~MainControlLoop() override = default;
 
-    void drivesControlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr &drives_command_msg);
+    void drivesControlCallback(const motorcortex_msgs::DriveOutList::ConstPtr &drives_command_msg);
 
     void diosControlCallback(const motorcortex_msgs::DigitalOutputsList::ConstPtr &dios_command_msg);
 

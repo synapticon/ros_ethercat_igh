@@ -12,8 +12,8 @@
 #include "Cia402FsmTransition.h"
 #include "DriveDef.h"
 
-#include "motorcortex_msgs/MotorcortexIn.h"
-#include "motorcortex_msgs/MotorcortexOut.h"
+#include "motorcortex_msgs/DriveIn.h"
+#include "motorcortex_msgs/DriveOut.h"
 
 
 class Drive : public mcx::container::Module {
@@ -24,11 +24,11 @@ public:
 
     ~Drive() override = default;
 
-    const motorcortex_msgs::MotorcortexIn &getDriveFeedback() const {
+    const motorcortex_msgs::DriveIn &getDriveFeedback() const {
         return driveFeedback_;
     }
 
-    void setDriveCommand(const motorcortex_msgs::MotorcortexOut& driveCommand) {
+    void setDriveCommand(const motorcortex_msgs::DriveOut& driveCommand) {
         driveCommand_ = driveCommand;
     }
 
@@ -45,9 +45,9 @@ private:
 
     bool iterateOp_(const mcx::container::TaskTime &system_time, mcx::container::UserTime *user_time) override;
 
-    motorcortex_msgs::MotorcortexIn driveFeedback_;
+    motorcortex_msgs::DriveIn driveFeedback_;
 
-    motorcortex_msgs::MotorcortexOut driveCommand_;
+    motorcortex_msgs::DriveOut driveCommand_;
     decltype(driveCommand_.controlword) oldControlWord{};
     decltype(driveCommand_.opmode) opmode{};
 

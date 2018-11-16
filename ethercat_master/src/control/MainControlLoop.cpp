@@ -8,11 +8,11 @@
 using namespace mcx;
 
 void MainControlLoop::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
-    sub_drives_ = nh_.subscribe<motorcortex_msgs::MotorcortexOutList>("/motorcortex_control", 1,
+    sub_drives_ = nh_.subscribe<motorcortex_msgs::DriveOutList>("/drive_control", 1,
                                                                       &MainControlLoop::drivesControlCallback, this);
     sub_dios_ = nh_.subscribe<motorcortex_msgs::DigitalOutputsList>("/digital_outputs", 1,
                                                                     &MainControlLoop::diosControlCallback, this);
-    drive_feedback_pub_ = nh_.advertise<motorcortex_msgs::MotorcortexInList>("/motorcortex_feedback", 1);
+    drive_feedback_pub_ = nh_.advertise<motorcortex_msgs::DriveInList>("/drive_feedback", 1);
     digital_inputs_pub_ = nh_.advertise<motorcortex_msgs::DigitalInputsList>("/digital_inputs", 1);
 
     std::string axisName = "axis";
@@ -52,7 +52,7 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
 
     ros::spinOnce();
 
-    motorcortex_msgs::MotorcortexInList driveFeedbackList;
+    motorcortex_msgs::DriveInList driveFeedbackList;
 
     for (auto &drive : drives_) {
         drive.iterate(system_time, user_time);
@@ -72,7 +72,7 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
     return true;
 }
 
-void MainControlLoop::drivesControlCallback(const motorcortex_msgs::MotorcortexOutList::ConstPtr &drives_command_msg) {
+void MainControlLoop::drivesControlCallback(const motorcortex_msgs::DriveOutList::ConstPtr &drives_command_msg) {
     unsigned int max_counter = std::min(drives_.size(), drives_command_msg->drive_command.size());
     for (unsigned int i = 0; i < max_counter; i++) {
         drives_[i].setDriveCommand(drives_command_msg->drive_command[i]);

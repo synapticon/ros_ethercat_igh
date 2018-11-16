@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from motorcortex_msgs.msg import MotorcortexOut
+from motorcortex_msgs.msg import DriveOut
 from enum import Enum
 
 class DriveCommand(Enum):
@@ -114,7 +114,7 @@ class Drive(object):
         return self.status == DriveState.DRIVE_STATUS_FAULT.value
 
     def encode(self):
-        ctrl_msg = MotorcortexOut()
+        ctrl_msg = DriveOut()
         ctrl_msg.controlword = self.command
         ctrl_msg.opmode = self.mode
         ctrl_msg.target_position = self.targetPosition

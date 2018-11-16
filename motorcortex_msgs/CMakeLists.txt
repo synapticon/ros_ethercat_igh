@@ -8,10 +8,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  MotorcortexIn.msg
-  MotorcortexInList.msg
-  MotorcortexOut.msg
-  MotorcortexOutList.msg
+  DriveIn.msg
+  DriveInList.msg
+  DriveOut.msg
+  DriveOutList.msg
   DigitalInputs.msg
   DigitalInputsList.msg
   DigitalOutputs.msg
