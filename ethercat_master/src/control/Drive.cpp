@@ -44,7 +44,7 @@ bool Drive::initPhase1_() {
     driveFeedback_.digital_inputs.resize(4, 0);
     driveCommand_.digital_outputs.resize(4, 0);
 
-    addParameter("driveErrorCode", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_error_code);//FixMe: not implemented yet
+    addParameter("driveErrorCode", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.drive_error_code);
     addParameter("slaveTimestamp", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.slave_timestamp);
     addParameter("positionValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.position_value);
     addParameter("velocityValue", mcx::parameter_server::ParameterType::INPUT, &driveFeedback_.velocity_value);
@@ -81,6 +81,9 @@ bool Drive::initPhase1_() {
 
     addParameter("statusword", mcx::parameter_server::ParameterType::OUTPUT, &driveFeedback_.statusword);
 
+    // error handle
+    addParameter("upload", mcx::parameter_server::ParameterType::OUTPUT, &upload_);
+
     return true;
 }
 
@@ -113,6 +116,7 @@ bool Drive::iterateOp_(const container::TaskTime &system_time, container::UserTi
                 break;
             case DriveCommand::DRIVE_CMD_FAULT_ACK:
                 sm_.executeEvent(&Cia402FsmBase::faultAcknowledge);
+                driveCommand_.controlword = 0;
                 break;
             case DriveCommand::DRIVE_CMD_QUICK_STOP:
                 sm_.executeEvent(&Cia402FsmBase::gotoQuickStop);
@@ -126,6 +130,12 @@ bool Drive::iterateOp_(const container::TaskTime &system_time, container::UserTi
     sm_.iterate(getDtSec());
 
     driveFeedback_.statusword = sm_data_.drive_state;
+
+    if (sm_data_.drive_state == DriveState::DRIVE_STATUS_FAULT) {
+        upload_ = true;
+    } else {
+        upload_ = false;
+    }
 
     return true;
 }

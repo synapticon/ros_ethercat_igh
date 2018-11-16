@@ -2,6 +2,8 @@
 <Domain Name="Domain1" File="topology.xml" MapAll="1">
     <Device Id="0" Name="axis1">
         <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
+            <Upload>root/Control/axis1/upload</Upload>
+            <LinkTo Index="0">root/Control/axis1/driveErrorCode</LinkTo>
         </Sdo>
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">
@@ -107,6 +109,8 @@
     </Device>
     <Device Id="1" Name="axis2">
         <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
+            <Upload>root/Control/axis2/upload</Upload>
+            <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
         </Sdo>
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">

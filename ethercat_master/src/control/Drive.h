@@ -52,6 +52,7 @@ private:
     decltype(driveCommand_.opmode) opmode{};
 
 
+    bool upload_{};
     Cia402StateMachine sm_;
     Cia402FsmData sm_data_{};
     Transition sm_transition_;
