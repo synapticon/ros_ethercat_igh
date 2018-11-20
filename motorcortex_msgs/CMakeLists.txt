@@ -16,6 +16,15 @@ add_message_files(
   DigitalInputsList.msg
   DigitalOutputs.msg
   DigitalOutputsList.msg
+  TorqueControllerCfg.msg
+  VelocityControllerCfg.msg
+  PositionControllerCfg.msg
+)
+
+add_service_files(
+  FILES
+  GetSDOCfg.srv
+  SetSDOCfg.srv
 )
 
 ## Generate added messages and services with any dependencies listed here

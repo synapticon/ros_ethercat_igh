@@ -1,0 +1,8 @@
+float32 controller_Kp
+float32 controller_Ki
+float32 controller_Kd
+uint32  field_weakening_enable
+uint32  field_weakening_percentage
+uint32  field_weakening_starting_speed
+uint32  field_weakening_ending_speed
+uint32  commutation_angle_measurement_delay

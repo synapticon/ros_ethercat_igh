@@ -1,0 +1,8 @@
+float32 position_loop_Kp
+float32 position_loop_Ki
+float32 position_loop_Kd
+uint32  position_loop_integral_limit
+float32 velocity_loop_Kp
+float32 velocity_loop_Ki
+float32 velocity_loop_Kd
+uint32  velocity_loop_integral_limit

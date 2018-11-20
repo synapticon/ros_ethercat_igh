@@ -1,0 +1,5 @@
+bool[] read_cfg
+---
+TorqueControllerCfg[]   torque_controller_cfg
+VelocityControllerCfg[] velocity_controller_cfg
+PositionControllerCfg[] position_controller_cfg
