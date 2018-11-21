@@ -18,11 +18,12 @@
 #include "motorcortex_msgs/SetSDOCfg.h"
 
 class MainControlLoop : public mcx::container::Module {
+
 public:
 
-    MainControlLoop() = default;
+    MainControlLoop(unsigned int number_of_drives, unsigned int number_of_ios);
 
-    ~MainControlLoop() override = default;
+    ~MainControlLoop() override;
 
     void drivesControlCallback(const motorcortex_msgs::DriveOutList::ConstPtr &drives_command_msg);
 
@@ -52,8 +53,16 @@ private:
     ros::Publisher digital_inputs_pub_;
     ros::ServiceServer service_get_sdo_;
     ros::ServiceServer service_set_sdo_;
-    std::array<Drive, 2> drives_;
-    std::array<DigitalIO, 1> dio_devices_;
+
+
+    size_t number_of_drives_;
+    size_t number_of_ios_;
+    int* opmode_;
+    int* controlword_;
+    int* statusword_;
+    Drive* drives_;
+    DigitalIO* dio_devices_;
+
 
 };
 

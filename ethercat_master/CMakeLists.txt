@@ -12,13 +12,12 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  INCLUDE_DIRS src/control src/logic 
+  INCLUDE_DIRS src/control
   CATKIN_DEPENDS roscpp message_runtime roslib
 )
 
 include_directories(
   src/control
-  src/logic
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -26,7 +25,6 @@ include_directories(
 #add_subdirectory(logic)
 
 add_executable(ethercat_master_server src/main.cpp src/control/MainControlLoop.cpp src/control/Drive.cpp
-        src/logic/Cia402FsmBase.cpp src/logic/Cia402FsmImpl.cpp src/logic/Cia402FsmTransition.cpp
         src/control/DigitalIO.h src/control/DigitalIO.cpp src/control/DigitalIO.cpp)
 target_compile_options(ethercat_master_server PUBLIC -DPB_FIELD_32BIT -DLOG_LEVEL_INFO -DLOG_LEVEL_SM -DENABLE_ASSERT)
 target_link_libraries(ethercat_master_server mcx-core ${catkin_LIBRARIES})

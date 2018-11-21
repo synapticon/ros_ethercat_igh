@@ -11,6 +11,15 @@
 
 using namespace mcx;
 
+void link(parameter_server::Parameter *ps) {
+
+
+    ps->link("root/Control/controlword", "root/cia402/driveCommand");
+    ps->link("root/Control/opmode", "root/cia402/driveMode");
+    ps->link("root/cia402/driveState", "root/Control/statusword");
+
+}
+
 void run(const utils::CommandLineArgs &cmd_args) {
 
 // sets cycle time of the controls
@@ -39,7 +48,7 @@ void run(const utils::CommandLineArgs &cmd_args) {
     utils::printSystemConfig(cmd_args, "test_master");
 
 // creates main control loop
-    MainControlLoop main_control_loop;
+    MainControlLoop main_control_loop(2, 1);
     main_control_loop.create("Control", &param_server, rt_dt_micro_s);
 
 // creates cia402 driver
@@ -82,6 +91,10 @@ void run(const utils::CommandLineArgs &cmd_args) {
 
 // loads configuration from control.xml
     parameter_server::load(path_control, &param_server);
+
+
+// linking modules
+    link(&param_server);
 
 // starts logger and communication with non-realtime scheduler
     logger_task.start(rt_dt_micro_s, container::TaskSched::NORMAL);

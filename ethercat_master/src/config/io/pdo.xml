@@ -2,7 +2,7 @@
 <Domain Name="Domain1" File="topology.xml" MapAll="1">
     <Device Id="0" Name="axis1">
         <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
-            <Upload>root/Control/axis1/upload</Upload>
+            <Upload Index="0">root/cia402/uploadErrorCode</Upload>
             <LinkTo Index="0">root/Control/axis1/driveErrorCode</LinkTo>
         </Sdo>
         <!-- Tx PDO Mapping -->
@@ -97,19 +97,19 @@
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
-            <Link>root/Control/axis1/cia402StateIn</Link>
+            <Link Index="0">root/cia402/driveStatusWord</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
-            <Link>root/Control/axis1/cia402CmdOut</Link>
+            <Link Index="0">root/cia402/driveControlWord</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
-            <Link>root/Control/axis1/cia402OpmodeOut</Link>
+            <Link Index="0">root/cia402/driveOpMode</Link>
         </Pdo>
 
     </Device>
     <Device Id="1" Name="axis2">
         <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
-            <Upload>root/Control/axis2/upload</Upload>
+            <Upload Index="1">root/cia402/uploadErrorCode</Upload>
             <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
         </Sdo>
         <!-- Tx PDO Mapping -->
@@ -204,13 +204,13 @@
         </Pdo>
         <!-- CiA 402 Objects Mapping -->
         <Pdo Entry="6041:0" Group="In" Name="Statusword">
-            <Link>root/Control/axis2/cia402StateIn</Link>
+            <Link Index="1">root/cia402/driveStatusWord</Link>
         </Pdo>
         <Pdo Entry="6040:0" Group="Out" Name="Controlword">
-            <Link>root/Control/axis2/cia402CmdOut</Link>
+            <Link Index="1">root/cia402/driveControlWord</Link>
         </Pdo>
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
-            <Link>root/Control/axis2/cia402OpmodeOut</Link>
+            <Link Index="1">root/cia402/driveOpMode</Link>
         </Pdo>
     </Device>
     <Device Id="2" Name="device1">
