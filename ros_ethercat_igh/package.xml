@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros_ethercat</name>
+  <name>ros_ethercat_igh</name>
   <version>0.0.0</version>
   <description>
     ROS EtherCAT meta-package
