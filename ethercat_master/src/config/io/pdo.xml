@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
 <Domain Name="Domain1" File="topology.xml" MapAll="1">
     <Device Id="0" Name="axis1">
-        <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
-            <Upload Index="0">root/cia402/uploadErrorCode</Upload>
-            <LinkTo Index="0">root/Control/axis1/driveErrorCode</LinkTo>
-        </Sdo>
+        <!--********************PDOs********************-->
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">
             <DataType>UINT32</DataType>
@@ -105,13 +102,121 @@
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
             <Link Index="0">root/cia402/driveOpMode</Link>
         </Pdo>
+        <!--********************SDOs********************-->
+        <!-- Error handling -->
+        <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
+            <Upload Index="0">root/cia402/uploadErrorCode</Upload>
+            <LinkTo Index="0">root/Control/axis1/driveErrorCode</LinkTo>
+        </Sdo>
+        <!-- Configurable parameters -->
+        <Sdo Entry="2010:1" Size="4" Group="SDOs/Torque Controller" Name="Controller Kp">
+            <LinkTo>root/Control/axis1/SDORead/torqueControllerKp</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/torqueControllerKp</LinkFrom>-->
+            <DataType>FLOAT</DataType>
+        </Sdo>
+        <Sdo Entry="2010:2" Size="4" Group="SDOs/Torque Controller" Name="Controller Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/torqueControllerKi</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/torqueControllerKi</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:3" Size="4" Group="SDOs/Torque Controller" Name="Controller Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/torqueControllerKd</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/torqueControllerKd</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:4" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Enable">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/fieldWeakeningEnable</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/fieldWeakeningEnable</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:5" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Percentage">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/fieldWeakeningPercentage</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/fieldWeakeningPercentage</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:6" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Starting Speed">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/fieldWeakeningStartingSpeed</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/fieldWeakeningStartingSpeed</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:7" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Ending Speed">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/fieldWeakeningEndingSpeed</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/fieldWeakeningEndingSpeed</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:8" Size="4" Group="SDOs/Torque Controller" Name="Commutation Angle Measurement Delay">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/commutationAngleMeasurementDelay</LinkTo>
+            <!--<LinkFrom>root/Control/axis1/SDOWrite/commutationAngleMeasurementDelay</LinkFrom>-->
+        </Sdo>
+
+
+        <Sdo Entry="2011:1" Size="4" Group="SDOs/Velocity Controller" Name="Controller Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/velocityControllerKp</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:2" Size="4" Group="SDOs/Velocity Controller" Name="Controller Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/velocityControllerKi</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:3" Size="4" Group="SDOs/Velocity Controller" Name="Controller Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/velocityControllerKd</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:4" Size="4" Group="SDOs/Velocity Controller" Name="Controller integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/velocityControllerIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/velocityControllerIntegralLimit</LinkFrom>
+        </Sdo>
+
+
+        <Sdo Entry="2012:1" Size="4" Group="SDOs/Position Controller" Name="Position Loop Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerPositionLoopKp</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerPositionLoopKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:2" Size="4" Group="SDOs/Position Controller" Name="Position Loop Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerPositionLoopKi</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerPositionLoopKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:3" Size="4" Group="SDOs/Position Controller" Name="Position Loop Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerPositionLoopKd</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerPositionLoopKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:4" Size="4" Group="SDOs/Position Controller" Name="Position Loop integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerPositionLoopIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerPositionLoopIntegralLimit</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:5" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerVelocityLoopKp</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerVelocityLoopKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:6" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerVelocityLoopKi</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerVelocityLoopKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:7" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerVelocityLoopKd</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerVelocityLoopKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:8" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis1/SDORead/positionControllerVelocityLoopIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis1/SDOWrite/positionControllerVelocityLoopIntegralLimit</LinkFrom>
+        </Sdo>
 
     </Device>
     <Device Id="1" Name="axis2">
-        <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
-            <Upload Index="1">root/cia402/uploadErrorCode</Upload>
-            <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
-        </Sdo>
+        <!--********************PDOs********************-->
         <!-- Tx PDO Mapping -->
         <Pdo Entry="20f0:0" Group="In" Name="Timestamp">
             <DataType>UINT32</DataType>
@@ -212,6 +317,12 @@
         <Pdo Entry="6060:0" Group="Out" Name="Opmode">
             <Link Index="1">root/cia402/driveOpMode</Link>
         </Pdo>
+        <!--********************SDOs********************-->
+        <!-- Error handling -->
+        <Sdo Entry="603f:0" Size="2" Group="SDOs" Name="Error Code">
+            <Upload Index="1">root/cia402/uploadErrorCode</Upload>
+            <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
+        </Sdo>
     </Device>
     <Device Id="2" Name="device1">
         <Pdo Entry="3001:1" Group="In" Name="Digital Input 1">

@@ -18,6 +18,8 @@ void link(parameter_server::Parameter *ps) {
     ps->link("root/Control/opmode", "root/cia402/driveMode");
     ps->link("root/cia402/driveState", "root/Control/statusword");
 
+    ps->link("root/Control/read_sdo", "root/EtherCAT/Domain1/read_sdo");
+
 }
 
 void run(const utils::CommandLineArgs &cmd_args) {

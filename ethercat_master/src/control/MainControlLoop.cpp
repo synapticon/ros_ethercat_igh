@@ -28,6 +28,7 @@ MainControlLoop::~MainControlLoop() {
 }
 
 void MainControlLoop::create_(const char *name, parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) {
+
     sub_drives_ = nh_.subscribe<motorcortex_msgs::DriveOutList>("/drive_control", 1,
                                                                 &MainControlLoop::drivesControlCallback, this);
     sub_dios_ = nh_.subscribe<motorcortex_msgs::DigitalOutputsList>("/digital_outputs", 1,
@@ -59,6 +60,9 @@ bool MainControlLoop::initPhase1_() {
     addParameter("opmode", mcx::parameter_server::ParameterType::OUTPUT, opmode_, number_of_drives_);
     addParameter("statusword", mcx::parameter_server::ParameterType::INPUT, statusword_, number_of_drives_);
 
+    addParameter("read_sdo", mcx::parameter_server::ParameterType::OUTPUT, &read_sdo_);
+    addParameter("read_sdo_update_sec", mcx::parameter_server::ParameterType::PARAMETER, &read_sdo_time_max_sec_);
+
     return true;
 }
 
@@ -75,6 +79,14 @@ bool MainControlLoop::stopOp_() {
 }
 
 bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, container::UserTime *user_time) {
+
+    if (read_sdo_time_sec_ >= read_sdo_time_max_sec_) {
+        read_sdo_time_sec_ = 0;
+        read_sdo_ = true;
+    } else {
+        read_sdo_ = false;
+        read_sdo_time_sec_ += getDtSec();
+    }
 
     ros::spinOnce();
 
@@ -118,24 +130,24 @@ void MainControlLoop::diosControlCallback(const motorcortex_msgs::DigitalOutputs
 bool MainControlLoop::getSDOSrv(motorcortex_msgs::GetSDOCfg::Request &req,
                                 motorcortex_msgs::GetSDOCfg::Response &res) {
     unsigned int max_counter = std::min(number_of_drives_, req.read_cfg.size());
-
     for (unsigned int i = 0; i < max_counter; i++) {
         //ToDO: request an update
         drives_[i].requestSDOUpdate(req.read_cfg[i]);
 
         //ToDo: receive the updated data
-        Drive::SDOCfg SDOCfg = drives_[i].getSDOCfg();
+        DriveSdo::SDOCfg SDOCfg = drives_[i].getSDOCfg();
         res.torque_controller_cfg.push_back(SDOCfg.torqueControllerCfg);
         res.velocity_controller_cfg.push_back(SDOCfg.velocityControllerCfg);
         res.position_controller_cfg.push_back(SDOCfg.positionControllerCfg);
     }
+
     return true;
 }
 
 bool MainControlLoop::setSDOSrv(motorcortex_msgs::SetSDOCfg::Request &req,
                                 motorcortex_msgs::SetSDOCfg::Response &res) {
     for (unsigned int i = 0; i < number_of_drives_; i++) {
-        Drive::SDOCfg sdoCfg;
+        DriveSdo::SDOCfg sdoCfg;
         if (i < req.torque_controller_cfg.size()) {
             sdoCfg.torqueControllerCfg = req.torque_controller_cfg[i];
         }

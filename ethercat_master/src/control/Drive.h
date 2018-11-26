@@ -6,12 +6,9 @@
 #define DRIVE_H
 
 #include <mcx/mcx_core.h>
-
+#include "DriveSdo.h"
 #include "motorcortex_msgs/DriveIn.h"
 #include "motorcortex_msgs/DriveOut.h"
-#include "motorcortex_msgs/TorqueControllerCfg.h"
-#include "motorcortex_msgs/VelocityControllerCfg.h"
-#include "motorcortex_msgs/PositionControllerCfg.h"
 
 
 class Drive : public mcx::container::Module {
@@ -20,11 +17,6 @@ public:
     Drive() = default;
     ~Drive() override = default;
 
-    struct SDOCfg {
-        motorcortex_msgs::TorqueControllerCfg torqueControllerCfg;
-        motorcortex_msgs::VelocityControllerCfg velocityControllerCfg;
-        motorcortex_msgs::PositionControllerCfg positionControllerCfg;
-    };
 
     const motorcortex_msgs::DriveIn &getDriveFeedback() const {
         return driveFeedback_;
@@ -46,12 +38,12 @@ public:
         driveCommand_ = driveCommand;
     }
 
-    void setSDOCfg(const SDOCfg& sdoCfg) {
-        sdoCfg_ = sdoCfg;
+    void setSDOCfg(const DriveSdo::SDOCfg& sdoCfg) {
+        drive_sdo_write_.setSDOCfg(sdoCfg);
     }
 
-    const SDOCfg &getSDOCfg() const {
-        return sdoCfg_;
+    const DriveSdo::SDOCfg &getSDOCfg() const {
+        return drive_sdo_read_.getSDOCfg();
     }
 
     void requestSDOUpdate(bool req) {
@@ -75,9 +67,10 @@ private:
 
     motorcortex_msgs::DriveOut driveCommand_;
 
-    SDOCfg sdoCfg_;
-
     bool request_update_{};
+
+    DriveSdo drive_sdo_read_;
+    DriveSdo drive_sdo_write_;
 
 };
 

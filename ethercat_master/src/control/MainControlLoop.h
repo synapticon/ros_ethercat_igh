@@ -62,6 +62,9 @@ private:
     int* statusword_;
     Drive* drives_;
     DigitalIO* dio_devices_;
+    bool read_sdo_;
+    double read_sdo_time_max_sec_{0.5};
+    double read_sdo_time_sec_{};
 
 
 };
