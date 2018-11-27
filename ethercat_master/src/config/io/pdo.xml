@@ -323,6 +323,111 @@
             <Upload Index="1">root/cia402/uploadErrorCode</Upload>
             <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
         </Sdo>
+        <!-- Configurable parameters -->
+        <Sdo Entry="2010:1" Size="4" Group="SDOs/Torque Controller" Name="Controller Kp">
+            <LinkTo>root/Control/axis2/SDORead/torqueControllerKp</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/torqueControllerKp</LinkFrom>-->
+            <DataType>FLOAT</DataType>
+        </Sdo>
+        <Sdo Entry="2010:2" Size="4" Group="SDOs/Torque Controller" Name="Controller Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/torqueControllerKi</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/torqueControllerKi</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:3" Size="4" Group="SDOs/Torque Controller" Name="Controller Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/torqueControllerKd</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/torqueControllerKd</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:4" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Enable">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/fieldWeakeningEnable</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/fieldWeakeningEnable</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:5" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Percentage">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/fieldWeakeningPercentage</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/fieldWeakeningPercentage</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:6" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Starting Speed">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/fieldWeakeningStartingSpeed</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/fieldWeakeningStartingSpeed</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:7" Size="4" Group="SDOs/Torque Controller" Name="Field Weakening Ending Speed">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/fieldWeakeningEndingSpeed</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/fieldWeakeningEndingSpeed</LinkFrom>-->
+        </Sdo>
+        <Sdo Entry="2010:8" Size="4" Group="SDOs/Torque Controller" Name="Commutation Angle Measurement Delay">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/commutationAngleMeasurementDelay</LinkTo>
+            <!--<LinkFrom>root/Control/axis2/SDOWrite/commutationAngleMeasurementDelay</LinkFrom>-->
+        </Sdo>
+
+
+        <Sdo Entry="2011:1" Size="4" Group="SDOs/Velocity Controller" Name="Controller Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/velocityControllerKp</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/velocityControllerKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:2" Size="4" Group="SDOs/Velocity Controller" Name="Controller Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/velocityControllerKi</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/velocityControllerKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:3" Size="4" Group="SDOs/Velocity Controller" Name="Controller Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/velocityControllerKd</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/velocityControllerKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2011:4" Size="4" Group="SDOs/Velocity Controller" Name="Controller integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/velocityControllerIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/velocityControllerIntegralLimit</LinkFrom>
+        </Sdo>
+
+
+        <Sdo Entry="2012:1" Size="4" Group="SDOs/Position Controller" Name="Position Loop Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerPositionLoopKp</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerPositionLoopKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:2" Size="4" Group="SDOs/Position Controller" Name="Position Loop Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerPositionLoopKi</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerPositionLoopKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:3" Size="4" Group="SDOs/Position Controller" Name="Position Loop Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerPositionLoopKd</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerPositionLoopKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:4" Size="4" Group="SDOs/Position Controller" Name="Position Loop integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerPositionLoopIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerPositionLoopIntegralLimit</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:5" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Kp">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerVelocityLoopKp</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerVelocityLoopKp</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:6" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Ki">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerVelocityLoopKi</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerVelocityLoopKi</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:7" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop Kd">
+            <DataType>FLOAT</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerVelocityLoopKd</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerVelocityLoopKd</LinkFrom>
+        </Sdo>
+        <Sdo Entry="2012:8" Size="4" Group="SDOs/Position Controller" Name="Velocity Loop integral limit">
+            <DataType>UINT32</DataType>
+            <LinkTo>root/Control/axis2/SDORead/positionControllerVelocityLoopIntegralLimit</LinkTo>
+            <LinkFrom>root/Control/axis2/SDOWrite/positionControllerVelocityLoopIntegralLimit</LinkFrom>
+        </Sdo>
     </Device>
     <Device Id="2" Name="device1">
         <Pdo Entry="3001:1" Group="In" Name="Digital Input 1">
