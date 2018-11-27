@@ -28,8 +28,8 @@ public:
         for (auto& handle : handles_) {
             handle.updateOutputOnce();
         }
-        LOG_INFO("kp: %f", sdoCfg_.positionControllerCfg.position_loop_Kp);
-        LOG_INFO("All params updated");
+        //LOG_INFO("kp: %f", sdoCfg_.velocityControllerCfg.controller_Kp);
+        //LOG_INFO("All params updated");
     }
 
     const SDOCfg &getSDOCfg() const {
