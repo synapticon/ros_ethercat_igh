@@ -50,6 +50,14 @@ public:
         request_update_ = req;
     }
 
+    void saveAllCfg(const uint32_t& save_cfg) {
+        drive_sdo_write_.saveAllCfg(save_cfg);
+    }
+
+    void restoreAllCfg(const uint32_t& restore_cfg) {
+        drive_sdo_write_.restoreAllCfg(restore_cfg);
+    }
+
 private:
     void create_(const char *name, mcx::parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) override;
 

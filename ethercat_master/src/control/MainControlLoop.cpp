@@ -39,6 +39,8 @@ void MainControlLoop::create_(const char *name, parameter_server::Parameter *par
 
     service_get_sdo_ = nh_.advertiseService("get_sdo_config", &MainControlLoop::getSDOSrv, this);
     service_set_sdo_ = nh_.advertiseService("set_sdo_config", &MainControlLoop::setSDOSrv, this);
+    service_save_cfg_ = nh_.advertiseService("save_sdo_config", &MainControlLoop::saveCfgParamsSrv, this);
+    service_restore_cfg_ = nh_.advertiseService("restore_default_sdo_config",  &MainControlLoop::restoreCfgParamsSrv, this);
 
     std::string axisName = "axis";
     for (unsigned int i = 0; i < number_of_drives_; i++) {
@@ -163,4 +165,39 @@ bool MainControlLoop::setSDOSrv(motorcortex_msgs::SetSDOCfg::Request &req,
         //ToDo: notify of success or failure
         res.success.push_back(true);
     }
+
+    return true;
+}
+
+bool MainControlLoop::saveCfgParamsSrv(motorcortex_msgs::SaveCfgParams::Request &req,
+                                       motorcortex_msgs::SaveCfgParams::Response &res) {
+
+    unsigned int max_counter = std::min(number_of_drives_, req.save.size());
+    LOG_INFO("save called %i", max_counter);
+    for (unsigned int i = 0; i < max_counter; i++) {
+        LOG_INFO("save: %s", req.save[i] ? "true" : "false");
+        if (req.save[i]) {
+            drives_[i].saveAllCfg(0x65766173);//"save"
+        }
+
+        //ToDo: notify of success or failure
+        res.success.push_back(true);
+    }
+    return true;
+}
+
+bool MainControlLoop::restoreCfgParamsSrv(motorcortex_msgs::RestoreCfgParams::Request &req,
+                                          motorcortex_msgs::RestoreCfgParams::Response &res) {
+    unsigned int max_counter = std::min(number_of_drives_, req.reset_to_default.size());
+    for (unsigned int i = 0; i < max_counter; i++) {
+        LOG_INFO("reset to default: %s", req.reset_to_default[i] ? "true" : "false");
+        if (req.reset_to_default[i]) {
+            drives_[i].restoreAllCfg(0x64616f6c);//"load"
+        }
+
+        //ToDo: notify of success or failure
+        res.success.push_back(true);
+    }
+
+    return true;
 }

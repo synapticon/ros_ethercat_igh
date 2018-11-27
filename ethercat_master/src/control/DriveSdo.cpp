@@ -63,6 +63,14 @@ bool DriveSdo::initPhase1_() {
         handle.updateOutput(false);
     }
 
+    param = addParameter("saveAllParameters", ParameterType::PARAMETER, &save_cfg_);
+    save_params_handler_ = param;
+    save_params_handler_.updateOutput(false);
+
+    param = addParameter("restoreAllParameters", ParameterType::PARAMETER, &restore_cfg_);
+    restore_params_handler_ = param;
+    restore_params_handler_.updateOutput(false);
+
     return true;
 }
 

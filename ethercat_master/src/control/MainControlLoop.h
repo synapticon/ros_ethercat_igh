@@ -16,6 +16,8 @@
 #include "motorcortex_msgs/DigitalOutputsList.h"
 #include "motorcortex_msgs/GetSDOCfg.h"
 #include "motorcortex_msgs/SetSDOCfg.h"
+#include "motorcortex_msgs/SaveCfgParams.h"
+#include "motorcortex_msgs/RestoreCfgParams.h"
 
 class MainControlLoop : public mcx::container::Module {
 
@@ -32,6 +34,10 @@ public:
     bool getSDOSrv(motorcortex_msgs::GetSDOCfg::Request &req, motorcortex_msgs::GetSDOCfg::Response &res);
 
     bool setSDOSrv(motorcortex_msgs::SetSDOCfg::Request &req, motorcortex_msgs::SetSDOCfg::Response &res);
+
+    bool saveCfgParamsSrv(motorcortex_msgs::SaveCfgParams::Request &req, motorcortex_msgs::SaveCfgParams::Response &res);
+
+    bool restoreCfgParamsSrv(motorcortex_msgs::RestoreCfgParams::Request &req, motorcortex_msgs::RestoreCfgParams::Response &res);
 
 private:
     void create_(const char *name, mcx::parameter_server::Parameter *parameter_server, uint64_t dt_micro_s) override;
@@ -53,6 +59,8 @@ private:
     ros::Publisher digital_inputs_pub_;
     ros::ServiceServer service_get_sdo_;
     ros::ServiceServer service_set_sdo_;
+    ros::ServiceServer service_save_cfg_;
+    ros::ServiceServer service_restore_cfg_;
 
 
     size_t number_of_drives_;

@@ -25,6 +25,8 @@ add_service_files(
   FILES
   GetSDOCfg.srv
   SetSDOCfg.srv
+  SaveCfgParams.srv
+  RestoreCfgParams.srv
 )
 
 ## Generate added messages and services with any dependencies listed here
