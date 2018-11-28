@@ -332,6 +332,15 @@
             <Upload Index="1">root/cia402/uploadErrorCode</Upload>
             <LinkTo Index="0">root/Control/axis2/driveErrorCode</LinkTo>
         </Sdo>
+        <!-- Saving and Restoring parameters -->
+        <Sdo Entry="1010:1" Size="4" Group="SDOs" Name="Save All Parameters">
+            <DataType>UINT32</DataType>
+            <LinkFrom>root/Control/axis2/SDOWrite/saveAllParameters</LinkFrom>
+        </Sdo>
+        <Sdo Entry="1011:1" Size="4" Group="SDOs" Name="Restore All Default Parameters">
+            <DataType>UINT32</DataType>
+            <LinkFrom>root/Control/axis2/SDOWrite/restoreAllParameters</LinkFrom>
+        </Sdo>
         <!-- Configurable parameters -->
         <Sdo Entry="2010:1" Size="4" Group="SDOs/Torque Controller" Name="Controller Kp">
             <LinkTo>root/Control/axis2/SDORead/torqueControllerKp</LinkTo>
