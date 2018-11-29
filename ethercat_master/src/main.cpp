@@ -46,6 +46,9 @@
 
 using namespace mcx;
 
+#define NUM_OF_DRIVES 2
+#define NUM_OD_DIOS 0
+
 void link(parameter_server::Parameter *ps) {
 
 
@@ -85,11 +88,11 @@ void run(const utils::CommandLineArgs &cmd_args) {
     utils::printSystemConfig(cmd_args, "test_master");
 
 // creates main control loop
-    MainControlLoop main_control_loop(2, 1);
+    MainControlLoop main_control_loop(NUM_OF_DRIVES, NUM_OD_DIOS);
     main_control_loop.create("Control", &param_server, rt_dt_micro_s);
 
 // creates cia402 driver
-    mcx::drive::Module cia402(cmd_args.system_mode, mcx::drive::DriveType::CiA402, 2);
+    mcx::drive::Module cia402(cmd_args.system_mode, mcx::drive::DriveType::CiA402, NUM_OF_DRIVES);
     cia402.create("cia402", &param_server, rt_dt_micro_s);
 
 // creates and configure control task

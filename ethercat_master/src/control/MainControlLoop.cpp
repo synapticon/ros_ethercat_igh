@@ -49,7 +49,9 @@ MainControlLoop::MainControlLoop(unsigned int number_of_drives, unsigned int num
     controlword_ = new int[number_of_drives]{};
     statusword_ = new int[number_of_drives]{};
     drives_ = new Drive[number_of_drives];
-    dio_devices_ = new DigitalIO[number_of_ios];
+    if (number_of_ios_ > 0) {
+        dio_devices_ = new DigitalIO[number_of_ios];
+    }
 
 }
 
@@ -66,11 +68,15 @@ void MainControlLoop::create_(const char *name, parameter_server::Parameter *par
 
     sub_drives_ = nh_.subscribe<motorcortex_msgs::DriveOutList>("/drive_control", 1,
                                                                 &MainControlLoop::drivesControlCallback, this);
-    sub_dios_ = nh_.subscribe<motorcortex_msgs::DigitalOutputsList>("/digital_outputs", 1,
-                                                                    &MainControlLoop::diosControlCallback, this);
+    if (number_of_ios_ > 0) {
+        sub_dios_ = nh_.subscribe<motorcortex_msgs::DigitalOutputsList>("/digital_outputs", 1,
+                                                                        &MainControlLoop::diosControlCallback, this);
+    }
 
     drive_feedback_pub_ = nh_.advertise<motorcortex_msgs::DriveInList>("/drive_feedback", 1);
-    digital_inputs_pub_ = nh_.advertise<motorcortex_msgs::DigitalInputsList>("/digital_inputs", 1);
+    if (number_of_ios_ > 0) {
+        digital_inputs_pub_ = nh_.advertise<motorcortex_msgs::DigitalInputsList>("/digital_inputs", 1);
+    }
 
     service_get_sdo_ = nh_.advertiseService("get_sdo_config", &MainControlLoop::getSDOSrv, this);
     service_set_sdo_ = nh_.advertiseService("set_sdo_config", &MainControlLoop::setSDOSrv, this);
@@ -137,15 +143,18 @@ bool MainControlLoop::iterateOp_(const container::TaskTime &system_time, contain
         driveFeedbackList.drives_feedback.push_back(drives_[i].getDriveFeedback());
     }
 
-    motorcortex_msgs::DigitalInputsList digitalInputsList;
-
-    for (unsigned int i = 0; i < number_of_ios_; i++) {
-        dio_devices_[i].iterate(system_time, user_time);
-        digitalInputsList.devices_feedback.push_back(dio_devices_[i].getDIOFeedback());
-    }
-
     drive_feedback_pub_.publish(driveFeedbackList);
-    digital_inputs_pub_.publish(digitalInputsList);
+
+    if (number_of_ios_ > 0) {
+        motorcortex_msgs::DigitalInputsList digitalInputsList;
+
+        for (unsigned int i = 0; i < number_of_ios_; i++) {
+            dio_devices_[i].iterate(system_time, user_time);
+            digitalInputsList.devices_feedback.push_back(dio_devices_[i].getDIOFeedback());
+        }
+
+        digital_inputs_pub_.publish(digitalInputsList);
+    }
 
     return true;
 }

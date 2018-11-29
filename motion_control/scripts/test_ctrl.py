@@ -10,20 +10,29 @@ from motorcortex_msgs.msg import DriveOutList, DriveInList, DigitalInputsList, D
 
 # list your slave devices here
 drives = [Drive(0), Drive(1)]
-dios = [DIO(0)]
+dios = [] # for example, [DIO(0)]
+
 
 def drives_feedback_callback(drive_feedback):
     for drive in drives:
         drive.update(drive_feedback.drives_feedback[drive.getId()])
 
 def digital_inputs_callback(digital_inputs):
-    for dio in dios:
-        dio.update(digital_inputs.devices_feedback[dio.getId()])
+    if not dios:
+        rospy.logerr("The list of DIOs is empty. Please unsubscribe or list the devices")
+    else:
+        for dio in dios:
+            dio.update(digital_inputs.devices_feedback[dio.getId()])
 
+# publish control commands
 drives_pub = rospy.Publisher('/drive_control', DriveOutList, queue_size = 1)
-dios_pub = rospy.Publisher('/digital_outputs', DigitalOutputsList, queue_size = 1)
+if dios:
+    dios_pub = rospy.Publisher('/digital_outputs', DigitalOutputsList, queue_size = 1)
+
+# subscribe to feedback topics
 rospy.Subscriber("/drive_feedback", DriveInList, drives_feedback_callback)
-rospy.Subscriber("/digital_inputs", DigitalInputsList, digital_inputs_callback)
+if dios:
+    rospy.Subscriber("/digital_inputs", DigitalInputsList, digital_inputs_callback)
 
 
 def safe_off():
@@ -33,13 +42,15 @@ def safe_off():
         drivesControlMsg.drive_command.append(drive.encode())
 
     digitalOutputsControlMsg = DigitalOutputsList()
-    for dio in dios:
-        digital_outputs = [False] * 12
-        dio.setDigitalOutputs(digital_outputs)
-        digitalOutputsControlMsg.devices_command.append(dio.encode())
+    if dios:
+        for dio in dios:
+            digital_outputs = [False] * 12
+            dio.setDigitalOutputs(digital_outputs)
+            digitalOutputsControlMsg.devices_command.append(dio.encode())
 
     drives_pub.publish(drivesControlMsg)
-    dios_pub.publish(digitalOutputsControlMsg)
+    if dios:
+        dios_pub.publish(digitalOutputsControlMsg)
 
 def controller():
 
@@ -95,7 +106,8 @@ def controller():
 
         # send here
         drives_pub.publish(drivesControlMsg)
-        dios_pub.publish(digitalOutputsControlMsg)
+        if dios:
+            dios_pub.publish(digitalOutputsControlMsg)
 
         counter += 1
         if counter > 200:
