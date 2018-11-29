@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>ros_ethercat_igh</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>
-    ROS EtherCAT meta-package
+    ROS EtherCAT IgH meta-package
   </description>
 
-  <maintainer email="vtretyakov@synapticon.com">Slava Tretyakov</maintainer>
-  <maintainer email="alexey.zakharov@vectioneer.com">Alexey Zakharov</maintainer>
-  
-  <license>TODO</license>
+  <author email="viatcheslav.tretyakov@gmail.com">Viatcheslav Tretyakov</author>
+  <author email="alexey.zakharov@vectioneer.com">Alexey Zakharov</author>
 
-  <author email="support@synapticon.com">Synapticon GmbH</author>
+  <maintainer email="support@synapticon.com">Synapticon GmbH</maintainer>
+  
+  <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 

@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>ethercat_master</name>
-  <version>0.0.0</version>
-  <description>EtherCAT Master Server package based on IgH and Motorcortex libraries</description>
+  <version>0.1.0</version>
+  <description>EtherCAT Master Server package based on EtherLab IgH and Motorcortex(T) libraries</description>
 
-  <maintainer email="vtretyakov@synapticon.com">Slava Tretyakov</maintainer>
-  <maintainer email="alexey.zakharov@vectioneer.com">Alexey Zakharov</maintainer>
+  <author email="viatcheslav.tretyakov@gmail.com">Viatcheslav Tretyakov</author>
+  <author email="alexey.zakharov@vectioneer.com">Alexey Zakharov</author>
 
-  <license>TODO</license>
+  <maintainer email="support@synapticon.com">Synapticon GmbH</maintainer>
+
+  <license>BSD</license>
 
   <build_depend>message_generation</build_depend>
   <buildtool_depend>catkin</buildtool_depend>
