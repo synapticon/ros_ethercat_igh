@@ -7,7 +7,7 @@ This is a generic implementation of a ROS-wrapped EtherCAT Master controller bas
 
 The maintained IgH driver installer maintained by [Synapticon](www.synapticon.com) can be downloaded from [here](https://github.com/synapticon/Etherlab_EtherCAT_Master)
 
-MotorCortex (TM) Core Debian packages can be downloaded from [here]()
+MotorCortex (TM) Core Debian packages can be downloaded from [here](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home)
 
 ## Installation procedures
 ### ROS
@@ -98,7 +98,7 @@ Let's explain it on the `Position Value` parameter and Process Data Object. Plea
 ```
 addParameter("positionValue", ParameterType::INPUT, &driveFeedback_.position_value);
 ```
-We are adding a parameter of a type INPUT (it is a value transfered from the slave to master, so it is considered as input from the master side) named `"positionValue"` and linking it to our internal variable `driveFeedback_.position_value` in this case being a member of the Drive Feedback ROS message (`motorcortex_msgs::DriveIn driveFeedback_`). This procedure creates an internal path ```<Link>root/Control/axisX/positionValue</Link>```, where `X` in `axisX` is automatically assigned enumeration starting from 1.
+We are adding a parameter of a type INPUT (it is a value transfered from the slave to master, so it is considered as input from the master side) named `"positionValue"` and linking it to our internal variable `driveFeedback_.position_value` in this case being a member of the Drive Feedback ROS message (`motorcortex_msgs::DriveIn driveFeedback_`). This procedure creates an internal path ```root/Control/axisX/positionValue```, where `X` in `axisX` is automatically assigned enumeration starting from 1.
 
 Please now navigate to your `pdo.xml` file (`thercat_master/src/config/io/pdo.xml`). There you'll find the following entry:
 ```
@@ -107,7 +107,7 @@ Please now navigate to your `pdo.xml` file (`thercat_master/src/config/io/pdo.xm
     <Link>root/Control/axis1/positionValue</Link>
 </Pdo>
 ```
-You may spot the already know line `<Link>root/Control/axis1/positionValue</Link>` linking your registered `"positionValue"` variable to the PDO Entry `Entry="6064:0"` At this point you should become familiar enough how to repeate the same procedure for all other variables and Process Data Objects you would like to link. 
+You may spot the already familiar line `<Link>root/Control/axis1/positionValue</Link>` linking your registered `"positionValue"` variable to the PDO Entry `Entry="6064:0"` At this point you should become familiar enough how to repeate the same procedure for all other variables and Process Data Objects you would like to link. 
 
 The same logic exists for Service Data Objects (SDO). Please navigate to `ethercat_master/src/control/DriveSdo.cpp` file. Let's examine this line:
 ```
@@ -122,5 +122,22 @@ struct SDOCfg {
     motorcortex_msgs::PositionControllerCfg positionControllerCfg;
 };
 ```
+This procedure creates two internal pathes `root/Control/axisX/SDORead/velocityControllerKp` and `root/Control/axisX/SDOWrite/velocityControllerKp`, where `X` in `axisX` is automatically assigned enumeration starting from 1. This is a result of creating two submodules in `ethercat_master/src/control/Drive.cpp` `create_()` method. One is used for writing the value and one for reading both linked to the same variable `"velocityControllerKp"`:
+
+```
+createSubmodule(&drive_sdo_read_, "SDORead");
+createSubmodule(&drive_sdo_write_, "SDOWrite");
+```
+
+Please now navigate to your `pdo.xml` file (`thercat_master/src/config/io/pdo.xml`). There you'll find the following entry:
+```
+<Sdo Entry="2011:1" Size="4" Group="SDOs/Velocity Controller" Name="Controller Kp">
+    <DataType>FLOAT</DataType>
+    <LinkTo>root/Control/axis1/SDORead/velocityControllerKp</LinkTo>
+    <LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKp</LinkFrom>
+</Sdo>
+```
+You may spot again the already familiar lines `<LinkTo>root/Control/axis1/SDORead/velocityControllerKp</LinkTo>` and `<LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKp</LinkFrom>`, one is linking the `Sdo Entry="2011:1"` on writing, and one on reading. From this point you should be able to link your other parameters in a similar way.
+
 
 
