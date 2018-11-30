@@ -304,4 +304,43 @@ Beginning of the control routine.
 
             drivesControlMsg.drive_command.append(drive.encode())
 ```
-The main drives control is happening here. 
+The main drives control is happening here. The logic is simple. If the drives in error state, we are resetting the error. Once the error is reset, we are switching them into operational state and selected operational mode. When the drives are operational, depending on the operational mode we are commanding reference values. At the end, we are combining commands for all the drives to be published on a ROS topic.
+
+```
+        digitalOutputsControlMsg = DigitalOutputsList()
+        for dio in dios:
+            # blink
+            if counter < 100:
+                output_state = True
+            else:
+                output_state = False
+
+            digital_outputs = [output_state] * 12
+            dio.setDigitalOutputs(digital_outputs)
+            digitalOutputsControlMsg.devices_command.append(dio.encode())
+```
+For simple Digital IO devices the routing is simpler. We are simply updating all outputs with 1 or 0 every second (loop time is 100Hz and when our counter is reaching 100 the value changes).  At the end, we are combining commands for all the DIO devices to be published on a ROS topic.
+
+```
+        # send here
+        drives_pub.publish(drivesControlMsg)
+        if dios:
+            dios_pub.publish(digitalOutputsControlMsg)
+```
+Here we are sending the previously assembled messages on ROS topics.
+
+```        counter += 1
+        if counter > 200:
+            counter = 0
+
+        r.sleep()
+```
+And finally, we are updating our counter and sleep. 
+
+```
+if __name__ == '__main__':
+    try:
+        controller()
+    except rospy.ROSInterruptException: pass
+```
+Executing the controller in main. 
