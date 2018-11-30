@@ -5,7 +5,7 @@ ros_ethercat_igh
 
 This is a generic implementation of a ROS-wrapped EtherCAT Master controller based on the [IgH EtherLab (R)](https://www.etherlab.org/en/what.php) EtherCAT Master Driver for Linux. The ROS EtherCAT master implementation is based on [MotorCortex (TM) Core Library](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home) provided by [Vectioneer](http://www.vectioneer.com/) as an installable Debian package in a binary form.
 
-The maintained IgH driver installer maintained by [Synapticon](www.synapticon.com) can be downloaded from [here](https://github.com/synapticon/Etherlab_EtherCAT_Master)
+The maintained IgH driver installer maintained by [Synapticon](https://www.synapticon.com/) can be downloaded from [here](https://github.com/synapticon/Etherlab_EtherCAT_Master)
 
 MotorCortex (TM) Core Debian packages can be downloaded from [here](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home). To control EtherCAT slave devices you requre the following packages to be downloaded matching with your version of Ubuntu OS:
 
@@ -40,7 +40,7 @@ $ sudo service ethercat start
 ```
 or 
 ```sh
-$ sudo /et/init.d/ethercat start
+$ sudo /etc/init.d/ethercat start
 ```
 
 To make sure your device is recognized and listed, please type 
@@ -101,7 +101,7 @@ Please be cautious about the tags. There are two types of slave devices are supp
 
 ##### 1. Process Data Objects (PDO) - realtime data
 
-After updating the XML configurations, if you are not using Synapticon devices, you need to register pathes on the master application. For this, please edit the `ethercat_master/src/control/Drive.cpp` file. The only code you need to modify there is in the `initPhase1_()` method. 
+After updating the XML configurations, if you are not using Synapticon devices, you need to register paths on the master application. For this, please edit the `ethercat_master/src/control/Drive.cpp` file. The only code you need to modify there is in the `initPhase1_()` method. 
 Let's explain it on the `Position Value` parameter and Process Data Object. Please exemine the line:
 ```
 addParameter("positionValue", ParameterType::INPUT, &driveFeedback_.position_value);
@@ -163,6 +163,12 @@ Please adjust the number according to the amount of devices you want to control.
 $ cd ~/catkin_ws
 $ catkin build
 ```
+##### 5. Run the `ehtercat_master` server application
+
+For your convinience there is a launch file. Please execute:
+```sh
+roslaunch motion_control motion_control.launch
+```
 
 ### Motion control test applications
 
@@ -175,5 +181,95 @@ The `motion_control` package contains a set of python scripts to test basic func
 * test_SDO_get_n_set.py -> service example to read, modify, and then write your configuration parameters over SDOs
 * test_restore_params.py -> service example to restore your configuration parameters from saved on a device
 * test_save_params.py -> service example to save your configuration parameters to a device
+
+#### Examining `test_ctrl.py`
+
+This is a simple application to make your motors turn in different operational modes and generate pulses on outputs of your DIO module. Let's exemine the code line by line.
+
+```
+from __future__ import print_function, division
+
+import rospy
+from drive import Drive, OpModesCiA402
+from dio import DIO
+
+from motorcortex_msgs.msg import DriveOutList, DriveInList, DigitalInputsList, DigitalOutputsList
+```
+Here we are importing all the dependancies and our custom ROS messages to be used by the application. The messages are defined in the `motorcortex_msgs` package.
+
+```
+# list your slave devices here
+drives = [Drive(0), Drive(1)]
+dios = [] # for example, [DIO(0)]
+```
+The first think you need to do is to list your devices. In this example two Drives are listed to be controlled and no DIO module.
+
+```
+def drives_feedback_callback(drive_feedback):
+    for drive in drives:
+        drive.update(drive_feedback.drives_feedback[drive.getId()])
+
+def digital_inputs_callback(digital_inputs):
+    if not dios:
+        rospy.logerr("The list of DIOs is empty. Please unsubscribe or list the devices")
+    else:
+        for dio in dios:
+            dio.update(digital_inputs.devices_feedback[dio.getId()])
+```
+Defining callback functions for Drives and DIOs. 
+
+```
+# publish control commands
+drives_pub = rospy.Publisher('/drive_control', DriveOutList, queue_size = 1)
+if dios:
+    dios_pub = rospy.Publisher('/digital_outputs', DigitalOutputsList, queue_size = 1)
+
+# subscribe to feedback topics
+rospy.Subscriber("/drive_feedback", DriveInList, drives_feedback_callback)
+if dios:
+    rospy.Subscriber("/digital_inputs", DigitalInputsList, digital_inputs_callback)
+```
+Creating publishers and subscribers. In this version the DIO module is optional.
+
+```
+def safe_off():
+    drivesControlMsg = DriveOutList()
+    for drive in drives:
+        drive.switchOff()
+        drivesControlMsg.drive_command.append(drive.encode())
+
+    digitalOutputsControlMsg = DigitalOutputsList()
+    if dios:
+        for dio in dios:
+            digital_outputs = [False] * 12
+            dio.setDigitalOutputs(digital_outputs)
+            digitalOutputsControlMsg.devices_command.append(dio.encode())
+
+    drives_pub.publish(drivesControlMsg)
+    if dios:
+        dios_pub.publish(digitalOutputsControlMsg)
+```
+Operation to be performed on the application termination. For drives we are commanding switch off which is triggered over a quick-stop internally. The outputs of DIO modules are set to zero.
+
+Now we come to the main `controller()` function definition.
+```
+def controller():
+    rospy.init_node('drive_control', anonymous=True)
+    rospy.on_shutdown(safe_off)
+    r = rospy.Rate(100)#Hz
+```
+Here we are initializing the ROS node, defining what function to execute when we shutting it down, and defining the control loop rate at 100Hz.
+
+```
+    # set your test parameters here
+    opMode = OpModesCiA402.CSV.value
+    positionIncrement = 1000
+    referenceVelocity = 500
+    referenceTorque = 50
+```
+Here you can select you control mode. Options are:
+* OpModesCiA402.CSP.value -> Cyclic Synchronous Position
+* OpModesCiA402.CSV.value -> Cyclic Synchronous Velocity
+* OpModesCiA402.CST.value -> Cyclic Synchronous Torque
 
 
