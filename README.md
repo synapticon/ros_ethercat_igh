@@ -1,22 +1,25 @@
 ros_ethercat_igh
 ----------------
 
-## Overview
+# Overview
 
-This is a generic implementation of a ROS-wrapped EtherCAT Master controller based on the [IgH EtherLab (R)](https://www.etherlab.org/en/what.php) EtherCAT Master Driver for Linux. The ROS EtherCAT master implementation is based on MotorCortex (TM) Core Library provided by [Vectioneer](http://www.vectioneer.com/) as an installable Debian package in a binary form.
+This is a generic implementation of a ROS-wrapped EtherCAT Master controller based on the [IgH EtherLab (R)](https://www.etherlab.org/en/what.php) EtherCAT Master Driver for Linux. The ROS EtherCAT master implementation is based on [MotorCortex (TM) Core Library](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home) provided by [Vectioneer](http://www.vectioneer.com/) as an installable Debian package in a binary form.
 
 The maintained IgH driver installer maintained by [Synapticon](www.synapticon.com) can be downloaded from [here](https://github.com/synapticon/Etherlab_EtherCAT_Master)
 
-MotorCortex (TM) Core Debian packages can be downloaded from [here](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home)
+MotorCortex (TM) Core Debian packages can be downloaded from [here](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home). To control EtherCAT slave devices you requre the following packages to be downloaded matching with your version of Ubuntu OS:
 
-## Installation procedures
-### ROS
+* Nanomsg Ubuntu
+* Motorcortex-core Ubuntu 
+
+# Installation procedures
+## ROS
 
 To install ROS, please refer to the original ROS installation documentation at [http://www.ros.org/install/](http://www.ros.org/install/)
 
 We have developed and tested this package in Ubuntu 16.04 and ROS Kinetic. Although theoretically other versions should be supported, we recommned if possible to start with this configuration.
 
-### IgH EtherCAT Master
+## IgH EtherCAT Master
 
 ```sh
 $ git clone https://github.com/synapticon/Etherlab_EtherCAT_Master.git
@@ -52,16 +55,17 @@ $ ethercat slaves
 1  0:1  PREOP  +  SOMANET CiA402 Drive
 ```
 
-### MotorCortex (TM) Core Library
+## MotorCortex (TM) Core Library
 
-Navigate to the directory containing the downloaded debian package and then type:
+Navigate to the directory containing the downloaded debian packages and then type:
 
 ```sh
-sudo dpkg -i xxxx
+sudo dpkg -i nanomsg-1.1.4-Linux.deb
+sudo dpkg -i motorcortex-core-0.9.7-Linux.deb
 ```
 Alternatively, double-clicking on the package should open the installation dialog.
 
-### This ROS package
+## This ROS package
 
 The package contains several modules:
 * ethercat_master -> EtherCAT master server application
@@ -69,7 +73,7 @@ The package contains several modules:
 * motorcortex_msgs -> Custom messages for client applications
 * ros_ethercat_igh -> Metha package
 
-#### Building
+### Building
 At this point you should be all set to start using this ROS package to control your devices. If you haven't yet cloned it, please do so into your [catkin configured workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment). 
 ```sh
 $ cd ~/catkin_ws/src
@@ -79,8 +83,8 @@ $ catkin build
 ```
 If you were using `catkin_make` command before, you may need to remove `build` and  `devel` folders in your catkin workspace for `catkin build` command to work. Otherwise continue using `catkin_make`. If with `catkin_make` the build will fail first time because the custom message headers cannot be found, please repeat several times to build. We are working on a solution.
 
-#### Configuring
-
+### Configuring
+#### Bus topology
 The ethercat_master package requires the information about your EtherCAT slave devices topology. 
 
 in `ethercat_master/src/config/io/` you'll find an example of such a script `topology.xml`. You don't need to write it by yourself but use IgH EtherLab (R) tool to generate it:
@@ -92,6 +96,10 @@ Now, if you are using Synapticon's [SOMANET Servo Drives](https://www.synapticon
 Please be cautious about the tags. There are two types of slave devices are supported: 
 * Servo Drives: ```<Device Id="0" Name="axis1">``` with the `Id` corresponding to the topology of the bus starting from `0`, and the associated name starting from `axis1` 
 * DIO modules ``` <Device Id="2" Name="device1">``` with the `Id` corresponding to the topology of the bus, and the associated name starting from `device1`
+
+#### Linking your application variables to EtherCAT slave devices' Object Dictionary
+
+##### 1. Process Data Objects (PDO) - realtime data
 
 After updating the XML configurations, if you are not using Synapticon devices, you need to register pathes on the master application. For this, please edit the `ethercat_master/src/control/Drive.cpp` file. The only code you need to modify there is in the `initPhase1_()` method. 
 Let's explain it on the `Position Value` parameter and Process Data Object. Please exemine the line:
@@ -109,6 +117,7 @@ Please now navigate to your `pdo.xml` file (`thercat_master/src/config/io/pdo.xm
 ```
 You may spot the already familiar line `<Link>root/Control/axis1/positionValue</Link>` linking your registered `"positionValue"` variable to the PDO Entry `Entry="6064:0"` At this point you should become familiar enough how to repeate the same procedure for all other variables and Process Data Objects you would like to link. 
 
+##### 2. Service Data Objects (SDO) - configuration parameters
 The same logic exists for Service Data Objects (SDO). Please navigate to `ethercat_master/src/control/DriveSdo.cpp` file. Let's examine this line:
 ```
 param = addParameter("velocityControllerKp", ParameterType::PARAMETER, &sdoCfg_.velocityControllerCfg.controller_Kp);
@@ -139,5 +148,32 @@ Please now navigate to your `pdo.xml` file (`thercat_master/src/config/io/pdo.xm
 ```
 You may spot again the already familiar lines `<LinkTo>root/Control/axis1/SDORead/velocityControllerKp</LinkTo>` and `<LinkFrom>root/Control/axis1/SDOWrite/velocityControllerKp</LinkFrom>`, one is linking the `Sdo Entry="2011:1"` on writing, and one on reading. From this point you should be able to link your other parameters in a similar way.
 
+##### 3. Defining the amount of devices to be used
+
+Once you've configured and linked your variables, you need tel the server application how many instances to control to be created. For this please navigate to `main.cpp` file inside the `ethercat_master/src/` folder. You'll find the following lines:
+```
+#define NUM_OF_DRIVES 2
+#define NUM_OD_DIOS 0
+```
+
+Please adjust the number according to the amount of devices you want to control. It is possible to have more devices included in the `topology.xml` and `pdo.xml` but control fewer of them.
+
+##### 4. Rebuild the server application after making the changes
+```sh
+$ cd ~/catkin_ws
+$ catkin build
+```
+
+### Motion control test applications
+
+The `motion_control` package contains a set of python scripts to test basic functionality and to guide you how to develop your own application.
+
+* test_ctrl.py -> main Drives and DIO control application
+  * Uses classes drive.py and dio.py
+* test_get_SDO.py -> service example to read your configuration parameters over SDOs
+* test_set_SDO.py -> service example to write your configuration parameters over SDOs
+* test_SDO_get_n_set.py -> service example to read, modify, and then write your configuration parameters over SDOs
+* test_restore_params.py -> service example to restore your configuration parameters from saved on a device
+* test_save_params.py -> service example to save your configuration parameters to a device
 
 
