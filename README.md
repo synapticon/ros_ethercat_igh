@@ -272,4 +272,36 @@ Here you can select you control mode. Options are:
 * OpModesCiA402.CSV.value -> Cyclic Synchronous Velocity
 * OpModesCiA402.CST.value -> Cyclic Synchronous Torque
 
+Then depending on your prefered control mode you can select target values. Please note, there is no ramp implemented! Sending high torque or velocity references can result in drives overcurrents. Please start with small values.
 
+```
+    # switch on here
+    while not rospy.is_shutdown():
+```
+Beginning of the control routine.
+```
+        # control here
+        drivesControlMsg = DriveOutList()
+        for drive in drives:
+            if drive.hasError():
+                print("drive %d has error"%drive.getId())
+                drive.resetError()
+            else:
+                drive.setMode(opMode)
+                drive.switchOn()
+
+            if drive.isEnabled():
+                if opMode == OpModesCiA402.CSP.value:
+                    drive.setPosition(drive.getPosition() + positionIncrement)
+                elif opMode == OpModesCiA402.CSV.value:
+                    drive.setVelocity(referenceVelocity)
+                elif opMode == OpModesCiA402.CST.value:
+                    drive.setTorque(referenceTorque)
+            else:
+                drive.setPosition(drive.getPosition())
+                drive.setVelocity(0)
+                drive.setTorque(0)
+
+            drivesControlMsg.drive_command.append(drive.encode())
+```
+The main drives control is happening here. 

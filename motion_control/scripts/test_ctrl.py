@@ -68,7 +68,7 @@ def controller():
 
     # switch on here
     while not rospy.is_shutdown():
-        # receive here
+        # control here
         drivesControlMsg = DriveOutList()
         for drive in drives:
             if drive.hasError():
