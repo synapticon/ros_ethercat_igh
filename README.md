@@ -3,7 +3,7 @@ ros_ethercat_igh
 
 # Overview
 
-This is a generic implementation of a ROS-wrapped EtherCAT Master controller based on the [IgH EtherLab (R)](https://www.etherlab.org/en/what.php) EtherCAT Master Driver for Linux. The ROS EtherCAT master implementation is based on [MotorCortex (TM) Core Library](http://git.vectioneer.com:30000/pub/motorcortex-dist/wikis/home) provided by [Vectioneer](http://www.vectioneer.com/) as an installable Debian package in a binary form.
+This is a generic implementation of a ROS-wrapped EtherCAT Master controller based on the [IgH EtherLab (R)](https://www.etherlab.org/en/what.php) EtherCAT Master Driver for Linux. The ROS EtherCAT master implementation is based on [MotorCortex (TM) Core Library](https://git.vectioneer.com/pub/motorcortex-dist/wikis/home) provided by [Vectioneer](http://www.vectioneer.com/) as an installable Debian package in a binary form.
 
 The maintained IgH driver installer maintained by [Synapticon](https://www.synapticon.com/) can be downloaded from [here](https://github.com/synapticon/Etherlab_EtherCAT_Master)
 
