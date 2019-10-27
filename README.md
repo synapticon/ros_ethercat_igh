@@ -61,7 +61,7 @@ Navigate to the directory containing the downloaded debian packages and then typ
 
 ```sh
 sudo dpkg -i nanomsg-1.1.4-Linux.deb
-sudo dpkg -i motorcortex-core-0.9.7-Linux.deb
+sudo dpkg -i motorcortex-core-0.9.8-Linux.deb
 ```
 Alternatively, double-clicking on the package should open the installation dialog.
 
