@@ -83,6 +83,21 @@ $ catkin build
 ```
 If you were using `catkin_make` command before, you may need to remove `build` and  `devel` folders in your catkin workspace for `catkin build` command to work. Otherwise continue using `catkin_make`. If with `catkin_make` the build will fail first time because the custom message headers cannot be found, please repeat several times to build. We are working on a solution.
 
+#### Known issues with snscn_installer
+It may happen that EtherCAT library is installed in `/opt/etherlab/`. The package will not compile throwing usually 
+```sh
+fatal error: ecrt.h: No such file or directory
+```
+You can check the location of the header file using [locate](https://www.howtoforge.com/tutorial/linux-search-files-from-the-terminal/) command.
+
+As a solution, please copy the headers and libraries into the standard location expected by the previously installed motorcortex debian packages:
+```sh
+$ cd /opt/etherlab/
+$ sudo cp include/* /usr/include/
+$ sudo cp -r lib/* /usr/lib/
+```
+After that, please try to recompile the ros package using `catkin_make` or `catkin build` command.
+
 ### Configuring
 #### Bus topology
 The ethercat_master package requires the information about your EtherCAT slave devices topology. 
