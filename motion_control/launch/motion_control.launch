@@ -1,4 +1,4 @@
 <launch>
-    <node pkg="ethercat_master" name="ros_ethercat_server" type="ethercat_master_server" output="screen">
+    <node pkg="ethercat_master" name="ros_ethercat_server" type="ethercat_master_server" args="-c=$(find ethercat_master)/src/config" output="screen">
     </node>
 </launch>
