@@ -83,7 +83,7 @@ $ catkin build
 ```
 If you were using `catkin_make` command before, you may need to remove `build` and  `devel` folders in your catkin workspace for `catkin build` command to work. Otherwise continue using `catkin_make`. If with `catkin_make` the build will fail first time because the custom message headers cannot be found, please repeat several times to build. We are working on a solution.
 
-#### Known issues with snscn_installer
+#### Known issues with sncn_installer
 It may happen that EtherCAT library is installed in `/opt/etherlab/`. The package will not compile throwing usually 
 ```sh
 fatal error: ecrt.h: No such file or directory
